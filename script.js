@@ -260,7 +260,13 @@ function displayTeamForTour(tourId) {
     });
 
     // Пересчитываем pendingRemovals при отображении состава
-    pendingRemovals = Array.from(slots).filter(slot => !slot.classList.contains("filled")).length;
+    pendingRemovals = 0; // Сбрасываем pendingRemovals
+    if (isTransferMode) {
+        pendingRemovals = Array.from(slots).filter(slot => !slot.classList.contains("filled")).length;
+        if (pendingRemovals > userData.availableTransfers) {
+            pendingRemovals = userData.availableTransfers;
+        }
+    }
 }
 
 // Функция для определения последнего завершённого тура
@@ -346,54 +352,106 @@ function isNewUser() {
 
 // Функция для сохранения данных пользователя в Firebase
 async function saveUserData() {
-    const userRef = database.ref("leaderboard/" + userData.nickname);
     try {
+        // Сохраняем данные в /users
+        const userRef = database.ref("users/" + userData.nickname);
         await userRef.set({
+            nickname: userData.nickname,
+            favoriteClub: userData.favoriteClub,
+            totalPoints: userData.totalPoints || 0,
+            tourPoints: userData.tourPoints || {},
+            hasSavedTeam: userData.hasSavedTeam || false,
+            joinedTour: userData.joinedTour || null
+        });
+
+        // Сохраняем данные в /leaderboard
+        const leaderboardRef = database.ref("leaderboard/" + userData.nickname);
+        await leaderboardRef.set({
             nickname: userData.nickname,
             score: userData.totalPoints || 0,
             favoriteClub: userData.favoriteClub
         });
+
         console.log("Данные пользователя успешно сохранены в Firebase");
+        localStorage.setItem("userData", JSON.stringify(userData));
     } catch (error) {
         console.error("Ошибка при сохранении данных в Firebase:", error);
-        throw error; // Пробрасываем ошибку для обработки в вызывающем коде
+        throw error;
     }
 }
 
-// Функция для отображения таблицы лидеров
 async function displayLeaderboard() {
-    const leaderboardList = document.getElementById("leaderboard-list");
-    if (!leaderboardList) {
-        console.warn("Элемент с id='leaderboard-list' не найден");
+    const overallTableBody = document.querySelector("#overall-leaderboard tbody");
+    const lastTourTableBody = document.querySelector("#last-tour-leaderboard tbody");
+
+    if (!overallTableBody || !lastTourTableBody) {
+        console.warn("Элементы таблицы лидеров не найдены");
         return;
     }
 
-    leaderboardList.innerHTML = "<tr><th>Место</th><th>Ник</th><th>Очки</th><th>Клуб</th></tr>";
+    overallTableBody.innerHTML = "<tr><td colspan='3'>Загрузка...</td></tr>";
+    lastTourTableBody.innerHTML = "<tr><td colspan='3'>Загрузка...</td></tr>";
 
     try {
-        const snapshot = await database.ref("leaderboard").once("value");
-        const leaderboardData = [];
-        snapshot.forEach(childSnapshot => {
-            leaderboardData.push(childSnapshot.val());
-        });
+        // Загружаем данные из Firebase
+        const snapshot = await database.ref("users").once("value");
+        const usersData = snapshot.val();
+        const allUsersFirebase = usersData ? Object.values(usersData) : [];
 
-        // Сортируем по убыванию очков
-        leaderboardData.sort((a, b) => b.score - a.score);
+        // Фильтруем пользователей с валидными никами и данными
+        const validUsers = allUsersFirebase.filter(user => 
+            user && 
+            user.nickname && 
+            user.nickname.trim() !== "" && 
+            user.hasSavedTeam && 
+            user.totalPoints !== undefined
+        );
 
-        // Отображаем топ-10
-        leaderboardData.slice(0, 10).forEach((entry, index) => {
-            const row = document.createElement("tr");
-            row.innerHTML = `
-                <td>${index + 1}</td>
-                <td>${entry.nickname}</td>
-                <td>${entry.score}</td>
-                <td>${entry.favoriteClub}</td>
-            `;
-            leaderboardList.appendChild(row);
-        });
+        // Общий рейтинг (топ-10)
+        overallTableBody.innerHTML = "";
+        const overallSorted = [...validUsers].sort((a, b) => (b.totalPoints || 0) - (a.totalPoints || 0));
+        if (overallSorted.length === 0) {
+            overallTableBody.innerHTML = `<tr><td colspan="3">Нет данных</td></tr>`;
+        } else {
+            overallSorted.slice(0, 10).forEach((user, index) => {
+                const row = document.createElement("tr");
+                row.innerHTML = `
+                    <td>${index + 1}</td>
+                    <td>${user.nickname}</td>
+                    <td>${user.totalPoints || 0}</td>
+                `;
+                overallTableBody.appendChild(row);
+            });
+        }
+
+        // Рейтинг за последний тур (топ-10)
+        lastTourTableBody.innerHTML = "";
+        const lastTour = getLastCompletedTour();
+        if (lastTour) {
+            const lastTourSorted = [...validUsers].sort((a, b) => 
+                (b.tourPoints?.[lastTour.id] || 0) - (a.tourPoints?.[lastTour.id] || 0)
+            );
+            if (lastTourSorted.length === 0) {
+                lastTourTableBody.innerHTML = `<tr><td colspan="3">Нет данных</td></tr>`;
+            } else {
+                lastTourSorted.slice(0, 10).forEach((user, index) => {
+                    const points = user.tourPoints?.[lastTour.id] || 0;
+                    const row = document.createElement("tr");
+                    row.innerHTML = `
+                        <td>${index + 1}</td>
+                        <td>${user.nickname}</td>
+                        <td>${points}</td>
+                    `;
+                    lastTourTableBody.appendChild(row);
+                });
+            }
+        } else {
+            lastTourTableBody.innerHTML = `<tr><td colspan="3">Нет завершённых туров</td></tr>`;
+        }
     } catch (error) {
-        console.error("Ошибка при загрузке таблицы лидеров:", error);
-        alert("Не удалось загрузить таблицу лидеров. Проверьте консоль для подробностей.");
+        console.error("Ошибка при загрузке данных для таблицы лидеров:", error);
+        overallTableBody.innerHTML = `<tr><td colspan="3">Ошибка загрузки данных</td></tr>`;
+        lastTourTableBody.innerHTML = `<tr><td colspan="3">Ошибка загрузки данных</td></tr>`;
     }
 }
 
@@ -714,11 +772,9 @@ document.addEventListener("DOMContentLoaded", function() {
                 budgetDisplay.textContent = budget;
 
                 if (isTransferMode) {
-                    // Тратим замену при добавлении игрока
                     userData.availableTransfers--;
-                    // Уменьшаем количество "ожидающих замен" слотов
                     pendingRemovals--;
-                    if (pendingRemovals < 0) pendingRemovals = 0;
+                    if (pendingRemovals < 0) pendingRemovals = 0; // Убедимся, что pendingRemovals не уйдёт в минус
                     document.getElementById("transfers-count").textContent = userData.availableTransfers;
                 }
 
@@ -760,8 +816,10 @@ document.addEventListener("DOMContentLoaded", function() {
         budgetDisplay.textContent = budget;
 
         if (isTransferMode) {
-            // Увеличиваем количество "ожидающих замен" слотов
             pendingRemovals++;
+            if (pendingRemovals > userData.availableTransfers) {
+                pendingRemovals = userData.availableTransfers; // Ограничиваем pendingRemovals доступными трансферами
+            }
         }
 
         saveUserData();
