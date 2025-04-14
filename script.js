@@ -97,7 +97,7 @@ const playersData = [
 const firebaseConfig = {
     apiKey: "AIzaSyDCC5kFrmQE0LcpCphUPEGhS-7ct7TPLcc",
     authDomain: "fantasy-leaderboard.firebaseapp.com",
-    databaseURL: "https://fantasy-leaderboard-default-rtdb.firebaseio.com",
+    databaseURL: "https://fantasy-leaderboard-default-rtdb.us-central1.firebasedatabase.app",
     projectId: "fantasy-leaderboard",
     storageBucket: "fantasy-leaderboard.firebasestorage.app",
     messagingSenderId: "330364892357",
