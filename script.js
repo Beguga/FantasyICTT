@@ -34,7 +34,7 @@ const playersData = [
     { name: "Мафина", position: "ПЗ", club: "Атлетико Горизонт", points: 0, price: 7, tourPoints: { 1: 0 } },
     { name: "Жоао Феликс", position: "НАП", club: "Атлетико Горизонт", points: 0, price: 8, tourPoints: { 1: 0 } },
     { name: "Яковлев Александр", position: "НАП", club: "Атлетико Горизонт", points: 0, price: 8, tourPoints: { 1: 0 } },
-    { name: "Александр Петров", position: "НАП", club: "Атлетико Горизонт", points: 0, price: 8, tourPoints: { 1: 0 } },
+    { name: "Александр Петров", position: "НАп", club: "Атлетико Горизонт", points: 0, price: 8, tourPoints: { 1: 0 } },
     { name: "Тимирбай Мансур", position: "НАП", club: "Атлетико Горизонт", points: 0, price: 8, tourPoints: { 1: 0 } },
     { name: "Ферсман Торрес", position: "НАП", club: "Атлетико Горизонт", points: 0, price: 8, tourPoints: { 1: 0 } },
     // Тюмень
@@ -71,7 +71,7 @@ const playersData = [
     { name: "Джек Крионель", position: "НАП", club: "Ритховен", points: 0, price: 8, tourPoints: { 1: 0 } },
     { name: "Юлиан Пьере", position: "НАП", club: "Ритховен", points: 0, price: 8, tourPoints: { 1: 0 } },
     { name: "Йерун Ван Дер Мерве", position: "НАП", club: "Ритховен", points: 0, price: 8, tourPoints: { 1: 0 } },
-    // Братислава и остальные
+    // Братислава
     { name: "Тимирбай Мансур", position: "НАП", club: "Атлетико Горизонт", points: 0, price: 8, tourPoints: { 1: 0 } },
     { name: "Ферсман Торрес", position: "НАП", club: "Атлетико Горизонт", points: 0, price: 8, tourPoints: { 1: 0 } },
     { name: "Анжело Герд", position: "ВР", club: "Сайрос", points: 0, price: 5, tourPoints: { 1: 1 } },
@@ -93,10 +93,7 @@ const playersData = [
     { name: "Картоввшка", position: "ПЗ", club: "РБ Тотем", points: 26, price: 1, tourPoints: { 1: 0 } },
 ];
 
-// Инициализация Firebase (совместимость с модульной версией 9.x)
-import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js';
-import { getDatabase, ref, get, set, remove } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-database.js';
-
+// Инициализация Firebase
 const firebaseConfig = {
     apiKey: "AIzaSyDCC5kFrmQE0LcpCphUPEGhS-7ct7TPLcc",
     authDomain: "fantasy-leaderboard.firebaseapp.com",
@@ -109,8 +106,13 @@ const firebaseConfig = {
 };
 
 // Инициализируем Firebase
-const app = initializeApp(firebaseConfig);
-const database = getDatabase(app);
+firebase.initializeApp(firebaseConfig);
+
+// Получаем ссылку на базу данных
+const database = firebase.database();
+
+// Инициализация всех пользователей (оставляем для совместимости, но теперь данные будут в Firebase)
+let allUsers = JSON.parse(localStorage.getItem("allUsers")) || [];
 
 // Данные пользователя
 let userData = JSON.parse(localStorage.getItem("userData")) || {
@@ -132,7 +134,7 @@ let currentPage = 1;
 const playersPerPage = 6;
 let selectedTourId = null;
 let isTransferMode = false;
-let pendingRemovals = 0;
+let pendingRemovals = 0; // Счётчик игроков, которые были убраны, но ещё не заменены
 
 // Эффекты наведения для кнопок на главной странице
 const fantasyButton = document.getElementById("fantasy-button");
@@ -257,6 +259,7 @@ function displayTeamForTour(tourId) {
         }
     });
 
+    // Пересчитываем pendingRemovals при отображении состава
     pendingRemovals = Array.from(slots).filter(slot => !slot.classList.contains("filled")).length;
 }
 
@@ -268,19 +271,19 @@ function getLastCompletedTour() {
 }
 
 // Функция для отображения таблицы лидеров (с использованием Firebase)
-async function displayLeaderboard() {
+function displayLeaderboard() {
     const overallTableBody = document.querySelector("#overall-leaderboard tbody");
     const lastTourTableBody = document.querySelector("#last-tour-leaderboard tbody");
 
     overallTableBody.innerHTML = "";
     lastTourTableBody.innerHTML = "";
 
-    try {
-        const usersRef = ref(database, "users");
-        const snapshot = await get(usersRef);
+    // Загружаем данные из Firebase
+    database.ref("users").once("value", snapshot => {
         const usersData = snapshot.val();
         const allUsersFirebase = usersData ? Object.values(usersData) : [];
 
+        // Фильтруем пользователей с валидными никами
         const validUsers = allUsersFirebase.filter(user => user.nickname && user.nickname.trim() !== "");
 
         // Общий рейтинг
@@ -312,11 +315,11 @@ async function displayLeaderboard() {
         } else {
             lastTourTableBody.innerHTML = `<tr><td colspan="3">Нет завершённых туров</td></tr>`;
         }
-    } catch (error) {
+    }).catch(error => {
         console.error("Ошибка при загрузке данных для таблицы лидеров:", error);
         overallTableBody.innerHTML = `<tr><td colspan="3">Ошибка загрузки данных</td></tr>`;
         lastTourTableBody.innerHTML = `<tr><td colspan="3">Ошибка загрузки данных</td></tr>`;
-    }
+    });
 }
 
 // Проверяем, является ли пользователь новичком
@@ -324,35 +327,34 @@ function isNewUser() {
     return !userData.hasSavedTeam;
 }
 
-// Сохраняем данные пользователя
-async function saveUserData() {
-    console.log("Сохраняем данные пользователя:", userData); // Отладка
+// Сохраняем данные пользователя (добавляем сохранение в Firebase)
+function saveUserData() {
     localStorage.setItem("userData", JSON.stringify(userData));
-
-    if (userData.nickname && userData.nickname.trim() !== "") {
-        try {
-            const userRef = ref(database, "users/" + userData.nickname);
-            await set(userRef, {
-                nickname: userData.nickname,
-                favoriteClub: userData.favoriteClub,
-                totalPoints: userData.totalPoints || 0,
-                tourPoints: userData.tourPoints || {},
-                selectedPlayers: userData.selectedPlayers,
-                teamHistory: userData.teamHistory,
-                budget: userData.budget,
-                availableTransfers: userData.availableTransfers,
-                joinedTour: userData.joinedTour,
-                hasSavedTeam: userData.hasSavedTeam
-            });
-            console.log("Данные успешно сохранены в Firebase для ника:", userData.nickname);
-            return true; // Успешное сохранение
-        } catch (error) {
-            console.error("Ошибка при сохранении данных в Firebase:", error);
-            return false; // Ошибка сохранения
-        }
+    const existingUserIndex = allUsers.findIndex(user => user.nickname === userData.nickname);
+    if (existingUserIndex !== -1) {
+        allUsers[existingUserIndex] = userData;
     } else {
-        console.log("Ник пустой, не сохраняем в Firebase");
-        return false; // Ник пустой
+        allUsers.push(userData);
+    }
+    localStorage.setItem("allUsers", JSON.stringify(allUsers));
+
+    // Сохраняем данные пользователя в Firebase
+    if (userData.nickname && userData.nickname.trim() !== "") {
+        const userRef = database.ref("users/" + userData.nickname);
+        userRef.set({
+            nickname: userData.nickname,
+            favoriteClub: userData.favoriteClub,
+            totalPoints: userData.totalPoints || 0,
+            tourPoints: userData.tourPoints || {},
+            selectedPlayers: userData.selectedPlayers,
+            teamHistory: userData.teamHistory,
+            budget: userData.budget,
+            availableTransfers: userData.availableTransfers,
+            joinedTour: userData.joinedTour,
+            hasSavedTeam: userData.hasSavedTeam
+        }).catch(error => {
+            console.error("Ошибка при сохранении данных в Firebase:", error);
+        });
     }
 }
 
@@ -361,58 +363,35 @@ document.addEventListener("DOMContentLoaded", function() {
     // Логика для fantasy.html
     const userForm = document.getElementById("user-form");
     if (userForm) {
-        console.log("Форма найдена, проверяем localStorage..."); // Отладка
         const userDataStored = localStorage.getItem("userData");
         if (userDataStored) {
             const parsedUserData = JSON.parse(userDataStored);
             if (parsedUserData.nickname && parsedUserData.nickname.trim() !== "") {
-                console.log("Ник уже есть в localStorage, перенаправляем на team-selection.html");
                 window.location.href = "team-selection.html";
                 return;
             }
         }
 
-        userForm.addEventListener("submit", async function(event) {
-            console.log("Форма отправлена!"); // Отладка
-            event.preventDefault(); // Предотвращаем стандартное поведение формы
-            console.log("event.preventDefault() вызван, перезагрузка должна быть отменена");
-
+        userForm.addEventListener("submit", function(event) {
+            event.preventDefault();
             const nickname = document.getElementById("nickname").value.trim();
             const favoriteClub = document.getElementById("favorite-club").value;
-            console.log("Введённый ник:", nickname, "Клуб:", favoriteClub); // Отладка
 
-            // Проверяем, что поля заполнены
-            if (!nickname || !favoriteClub) {
-                console.log("Ник или клуб не заполнены!");
-                alert("Пожалуйста, заполните оба поля!");
-                return;
-            }
-
-            try {
-                console.log("Проверяем, существует ли ник в Firebase...");
-                const userRef = ref(database, "users/" + nickname);
-                const snapshot = await get(userRef);
+            // Проверяем, существует ли пользователь в Firebase
+            database.ref("users/" + nickname).once("value", snapshot => {
                 if (snapshot.exists()) {
-                    console.log("Ник уже существует в Firebase:", nickname);
                     alert("Пользователь с таким ником уже существует! Пожалуйста, выберите другой ник.");
                     return;
                 }
 
-                console.log("Ник свободен, сохраняем данные...");
                 userData.nickname = nickname;
                 userData.favoriteClub = favoriteClub;
-                const saveSuccess = await saveUserData();
-                if (saveSuccess) {
-                    console.log("Данные сохранены, перенаправляем на team-selection.html");
-                    window.location.href = "team-selection.html";
-                } else {
-                    console.log("Не удалось сохранить данные в Firebase");
-                    alert("Не удалось сохранить данные. Попробуйте снова.");
-                }
-            } catch (error) {
+                saveUserData();
+                window.location.href = "team-selection.html";
+            }).catch(error => {
                 console.error("Ошибка при проверке ника в Firebase:", error);
                 alert("Произошла ошибка при проверке ника. Попробуйте снова.");
-            }
+            });
         });
     }
 
@@ -664,7 +643,9 @@ document.addEventListener("DOMContentLoaded", function() {
                 budgetDisplay.textContent = budget;
 
                 if (isTransferMode) {
+                    // Тратим замену при добавлении игрока
                     userData.availableTransfers--;
+                    // Уменьшаем количество "ожидающих замен" слотов
                     pendingRemovals--;
                     if (pendingRemovals < 0) pendingRemovals = 0;
                     document.getElementById("transfers-count").textContent = userData.availableTransfers;
@@ -708,6 +689,7 @@ document.addEventListener("DOMContentLoaded", function() {
         budgetDisplay.textContent = budget;
 
         if (isTransferMode) {
+            // Увеличиваем количество "ожидающих замен" слотов
             pendingRemovals++;
         }
 
@@ -757,25 +739,17 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Сброс данных (V + T)
     let isVPressed = false;
-    window.addEventListener("keydown", async function(event) {
+    document.addEventListener("keydown", function(event) {
         if (event.key.toLowerCase() === "v") {
             isVPressed = true;
         }
         if (event.key.toLowerCase() === "t" && isVPressed) {
-            const nicknameToRemove = userData.nickname;
-
-            if (nicknameToRemove && nicknameToRemove.trim() !== "") {
-                try {
-                    await remove(ref(database, "users/" + nicknameToRemove));
-                    console.log("Данные пользователя удалены из Firebase");
-                } catch (error) {
-                    console.error("Ошибка при удалении данных из Firebase:", error);
-                }
-            }
+            const originalNickname = userData.nickname;
+            const originalFavoriteClub = userData.favoriteClub;
 
             userData = {
-                nickname: "",
-                favoriteClub: "",
+                nickname: originalNickname,
+                favoriteClub: originalFavoriteClub,
                 selectedPlayers: [],
                 teamHistory: {},
                 tourPoints: {},
@@ -785,19 +759,35 @@ document.addEventListener("DOMContentLoaded", function() {
                 joinedTour: null,
                 hasSavedTeam: false
             };
-
             isTransferMode = false;
             pendingRemovals = 0;
+            saveUserData();
+
+            const slots = document.querySelectorAll(".player-slot");
+            slots.forEach(slot => {
+                slot.classList.remove("filled");
+                slot.innerHTML = "";
+                slot.dataset.player = "";
+            });
+
             budget = 100;
+            budgetDisplay.textContent = budget;
 
-            localStorage.removeItem("userData");
+            const transfersDiv = document.querySelector(".transfers");
+            transfersDiv.innerHTML = `<span>Соберите и сохраните состав</span>`;
 
-            window.location.href = "fantasy.html";
-            alert("Все данные сброшены! Вы будете перенаправлены на страницу регистрации.");
+            setJoinedTour();
+            selectedTourId = getCurrentTour().id;
+
+            renderTourButtons();
+            renderPlayers();
+            displayTourPoints(selectedTourId);
+
+            alert("Состав и данные сброшены! Ник и клуб остались прежними.");
         }
     });
 
-    window.addEventListener("keyup", function(event) {
+    document.addEventListener("keyup", function(event) {
         if (event.key.toLowerCase() === "v") {
             isVPressed = false;
         }
