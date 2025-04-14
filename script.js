@@ -34,7 +34,7 @@ const playersData = [
     { name: "Мафина", position: "ПЗ", club: "Атлетико Горизонт", points: 0, price: 7, tourPoints: { 1: 0 } },
     { name: "Жоао Феликс", position: "НАП", club: "Атлетико Горизонт", points: 0, price: 8, tourPoints: { 1: 0 } },
     { name: "Яковлев Александр", position: "НАП", club: "Атлетико Горизонт", points: 0, price: 8, tourPoints: { 1: 0 } },
-    { name: "Александр Петров", position: "НАп", club: "Атлетико Горизонт", points: 0, price: 8, tourPoints: { 1: 0 } },
+    { name: "Александр Петров", position: "НАП", club: "Атлетико Горизонт", points: 0, price: 8, tourPoints: { 1: 0 } },
     { name: "Тимирбай Мансур", position: "НАП", club: "Атлетико Горизонт", points: 0, price: 8, tourPoints: { 1: 0 } },
     { name: "Ферсман Торрес", position: "НАП", club: "Атлетико Горизонт", points: 0, price: 8, tourPoints: { 1: 0 } },
     // Тюмень
@@ -71,7 +71,7 @@ const playersData = [
     { name: "Джек Крионель", position: "НАП", club: "Ритховен", points: 0, price: 8, tourPoints: { 1: 0 } },
     { name: "Юлиан Пьере", position: "НАП", club: "Ритховен", points: 0, price: 8, tourPoints: { 1: 0 } },
     { name: "Йерун Ван Дер Мерве", position: "НАП", club: "Ритховен", points: 0, price: 8, tourPoints: { 1: 0 } },
-    // Братислава
+    // Братислава и остальные
     { name: "Тимирбай Мансур", position: "НАП", club: "Атлетико Горизонт", points: 0, price: 8, tourPoints: { 1: 0 } },
     { name: "Ферсман Торрес", position: "НАП", club: "Атлетико Горизонт", points: 0, price: 8, tourPoints: { 1: 0 } },
     { name: "Анжело Герд", position: "ВР", club: "Сайрос", points: 0, price: 5, tourPoints: { 1: 1 } },
@@ -326,6 +326,7 @@ function isNewUser() {
 
 // Сохраняем данные пользователя
 async function saveUserData() {
+    console.log("Сохраняем данные пользователя:", userData); // Отладка
     localStorage.setItem("userData", JSON.stringify(userData));
 
     if (userData.nickname && userData.nickname.trim() !== "") {
@@ -343,10 +344,15 @@ async function saveUserData() {
                 joinedTour: userData.joinedTour,
                 hasSavedTeam: userData.hasSavedTeam
             });
-            console.log("Данные пользователя успешно сохранены в Firebase");
+            console.log("Данные успешно сохранены в Firebase для ника:", userData.nickname);
+            return true; // Успешное сохранение
         } catch (error) {
             console.error("Ошибка при сохранении данных в Firebase:", error);
+            return false; // Ошибка сохранения
         }
+    } else {
+        console.log("Ник пустой, не сохраняем в Firebase");
+        return false; // Ник пустой
     }
 }
 
@@ -355,32 +361,54 @@ document.addEventListener("DOMContentLoaded", function() {
     // Логика для fantasy.html
     const userForm = document.getElementById("user-form");
     if (userForm) {
+        console.log("Форма найдена, проверяем localStorage..."); // Отладка
         const userDataStored = localStorage.getItem("userData");
         if (userDataStored) {
             const parsedUserData = JSON.parse(userDataStored);
             if (parsedUserData.nickname && parsedUserData.nickname.trim() !== "") {
+                console.log("Ник уже есть в localStorage, перенаправляем на team-selection.html");
                 window.location.href = "team-selection.html";
                 return;
             }
         }
 
         userForm.addEventListener("submit", async function(event) {
-            event.preventDefault();
+            console.log("Форма отправлена!"); // Отладка
+            event.preventDefault(); // Предотвращаем стандартное поведение формы
+            console.log("event.preventDefault() вызван, перезагрузка должна быть отменена");
+
             const nickname = document.getElementById("nickname").value.trim();
             const favoriteClub = document.getElementById("favorite-club").value;
+            console.log("Введённый ник:", nickname, "Клуб:", favoriteClub); // Отладка
+
+            // Проверяем, что поля заполнены
+            if (!nickname || !favoriteClub) {
+                console.log("Ник или клуб не заполнены!");
+                alert("Пожалуйста, заполните оба поля!");
+                return;
+            }
 
             try {
+                console.log("Проверяем, существует ли ник в Firebase...");
                 const userRef = ref(database, "users/" + nickname);
                 const snapshot = await get(userRef);
                 if (snapshot.exists()) {
+                    console.log("Ник уже существует в Firebase:", nickname);
                     alert("Пользователь с таким ником уже существует! Пожалуйста, выберите другой ник.");
                     return;
                 }
 
+                console.log("Ник свободен, сохраняем данные...");
                 userData.nickname = nickname;
                 userData.favoriteClub = favoriteClub;
-                await saveUserData();
-                window.location.href = "team-selection.html";
+                const saveSuccess = await saveUserData();
+                if (saveSuccess) {
+                    console.log("Данные сохранены, перенаправляем на team-selection.html");
+                    window.location.href = "team-selection.html";
+                } else {
+                    console.log("Не удалось сохранить данные в Firebase");
+                    alert("Не удалось сохранить данные. Попробуйте снова.");
+                }
             } catch (error) {
                 console.error("Ошибка при проверке ника в Firebase:", error);
                 alert("Произошла ошибка при проверке ника. Попробуйте снова.");
