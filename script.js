@@ -344,40 +344,56 @@ function isNewUser() {
     return !userData.hasSavedTeam;
 }
 
-// Сохраняем данные пользователя (добавляем сохранение в Firebase)
+// Функция для сохранения данных пользователя в Firebase
 async function saveUserData() {
+    const userRef = database.ref("leaderboard/" + userData.nickname);
     try {
-        // Сохраняем в localStorage
-        localStorage.setItem("userData", JSON.stringify(userData));
-
-        // Обновляем локальный список пользователей (для совместимости)
-        const existingUserIndex = allUsers.findIndex(user => user.nickname === userData.nickname);
-        if (existingUserIndex !== -1) {
-            allUsers[existingUserIndex] = { ...userData };
-        } else {
-            allUsers.push({ ...userData });
-        }
-        localStorage.setItem("allUsers", JSON.stringify(allUsers));
-
-        // Сохраняем данные пользователя в Firebase
-        if (userData.nickname && userData.nickname.trim() !== "") {
-            const userRef = database.ref("users/" + userData.nickname);
-            await userRef.set({
-                nickname: userData.nickname,
-                favoriteClub: userData.favoriteClub,
-                totalPoints: userData.totalPoints || 0,
-                tourPoints: userData.tourPoints || {},
-                selectedPlayers: userData.selectedPlayers || [],
-                teamHistory: userData.teamHistory || {},
-                budget: userData.budget || 100,
-                availableTransfers: userData.availableTransfers || 3,
-                joinedTour: userData.joinedTour || null,
-                hasSavedTeam: userData.hasSavedTeam || false
-            });
-        }
+        await userRef.set({
+            nickname: userData.nickname,
+            score: userData.totalPoints || 0,
+            favoriteClub: userData.favoriteClub
+        });
+        console.log("Данные пользователя успешно сохранены в Firebase");
     } catch (error) {
-        console.error("Ошибка при сохранении данных:", error);
-        throw error; // Передаем ошибку вызывающей функции
+        console.error("Ошибка при сохранении данных в Firebase:", error);
+        throw error; // Пробрасываем ошибку для обработки в вызывающем коде
+    }
+}
+
+// Функция для отображения таблицы лидеров
+async function displayLeaderboard() {
+    const leaderboardList = document.getElementById("leaderboard-list");
+    if (!leaderboardList) {
+        console.warn("Элемент с id='leaderboard-list' не найден");
+        return;
+    }
+
+    leaderboardList.innerHTML = "<tr><th>Место</th><th>Ник</th><th>Очки</th><th>Клуб</th></tr>";
+
+    try {
+        const snapshot = await database.ref("leaderboard").once("value");
+        const leaderboardData = [];
+        snapshot.forEach(childSnapshot => {
+            leaderboardData.push(childSnapshot.val());
+        });
+
+        // Сортируем по убыванию очков
+        leaderboardData.sort((a, b) => b.score - a.score);
+
+        // Отображаем топ-10
+        leaderboardData.slice(0, 10).forEach((entry, index) => {
+            const row = document.createElement("tr");
+            row.innerHTML = `
+                <td>${index + 1}</td>
+                <td>${entry.nickname}</td>
+                <td>${entry.score}</td>
+                <td>${entry.favoriteClub}</td>
+            `;
+            leaderboardList.appendChild(row);
+        });
+    } catch (error) {
+        console.error("Ошибка при загрузке таблицы лидеров:", error);
+        alert("Не удалось загрузить таблицу лидеров. Проверьте консоль для подробностей.");
     }
 }
 
