@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database-compat.js"></script>
+    <link rel="icon" type="image/png" href="images/favicon.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Team Selection - ICTT League Fantasy</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.cdnfonts.com/css/neue-machina" rel="stylesheet">
+</head>
+<body class="team-selection-page">
+    <!-- Кнопка для таблицы лидеров -->
+    <button id="leaderboard-button">Таблица лидеров</button>
+
+    <!-- Модальное окно для таблицы лидеров -->
+    <div id="leaderboard-modal" class="modal">
+        <div class="modal-content">
+            <span id="close-leaderboard" class="close">×</span>
+            <h2>Таблица лидеров</h2>
+            <div id="leaderboard-content">
+                <h3>Общий счёт</h3>
+                <table id="overall-leaderboard">
+                    <thead>
+                        <tr>
+                            <th>Место</th>
+                            <th>Никнейм</th>
+                            <th>Очки</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+                <h3>За последний тур</h3>
+                <table id="last-tour-leaderboard">
+                    <thead>
+                        <tr>
+                            <th>Место</th>
+                            <th>Никнейм</th>
+                            <th>Очки</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="team-selection-container">
+        <h2>Моя команда. Трансферы</h2>
+        <!-- Панель туров -->
+        <div class="tour-selection">
+            <div id="tour-buttons"></div>
+        </div>
+        <div class="team-selection-content">
+            <!-- Левая часть: поле с ячейками -->
+            <div class="field">
+                <div class="goalkeepers">
+                    <div class="player-slot" data-position="ВР"></div>
+                    <div class="player-slot" data-position="ВР"></div>
+                </div>
+                <div class="defenders">
+                    <div class="player-slot" data-position="ЗЩ"></div>
+                    <div class="player-slot" data-position="ЗЩ"></div>
+                    <div class="player-slot" data-position="ЗЩ"></div>
+                    <div class="player-slot" data-position="ЗЩ"></div>
+                    <div class="player-slot" data-position="ЗЩ"></div>
+                </div>
+                <div class="midfielders">
+                    <div class="player-slot" data-position="ПЗ"></div>
+                    <div class="player-slot" data-position="ПЗ"></div>
+                    <div class="player-slot" data-position="ПЗ"></div>
+                    <div class="player-slot" data-position="ПЗ"></div>
+                    <div class="player-slot" data-position="ПЗ"></div>
+                </div>
+                <div class="forwards">
+                    <div class="player-slot" data-position="НАП"></div>
+                    <div class="player-slot" data-position="НАП"></div>
+                    <div class="player-slot" data-position="НАП"></div>
+                </div>
+            </div>
+
+            <!-- Правая часть: список игроков -->
+            <div class="player-list">
+                <div class="filters">
+                    <select id="club-filter">
+                        <option value="all">Все клубы</option>
+                        <option value="Сайрос">Сайрос</option>
+                        <option value="Манреса">Манреса</option>   
+                        <option value="Ритховен">Ритховен</option>
+                        <option value="Уралан">Уралан</option>
+                        <option value="Мелитополь">Мелитополь</option>
+                        <option value="Кобресаль">Кобресаль</option>
+                        <option value="Тюмень">Тюмень</option>
+                        <option value="Атлетико Горизонт">Атлетико Горизонт</option>
+                        <option value="Гладиатор">Гладиатор</option>
+                        <option value="Флорида">Флорида</option>
+                        <option value="Металлург">Металлург</option>
+                        <option value="Лас Фьеро">Лас Фьеро</option>
+                        <option value="Капро">Капро</option>
+                        <option value="Фьорд">Фьорд</option>
+                        <option value="Джумейра">Джумейра</option>
+                        <option value="РБ Братислава">РБ Братислава</option>
+                        <option value="РБ Тотем">РБ Тотем</option>
+                        <option value="Колчестер">Колчестер</option>
+                    </select>
+                    <select id="position-filter">
+                        <option value="all">Все</option>
+                        <option value="ВР">Вратари</option>
+                        <option value="ЗЩ">Защитники</option>
+                        <option value="ПЗ">Полузащитники</option>
+                        <option value="НАП">Нападающие</option>
+                    </select>
+                    <select id="sort-filter">
+                        <option value="points-desc">Очки ↓</option>
+                        <option value="points-asc">Очки ↑</option>
+                        <option value="price-desc">Цена ↓</option>
+                        <option value="price-asc">Цена ↑</option>
+                    </select>
+                </div>
+                <div class="player-header">
+                    <span>Имя</span>
+                    <span>Поз</span>
+                    <span>Клуб</span>
+                    <span>Очки</span>
+                    <span>Цена</span>
+                    <span></span>
+                </div>
+                <div class="players">
+                    <!-- Игроки будут добавлены через JavaScript -->
+                </div>
+                <div class="pagination">
+                    <button id="prev-page" disabled>Назад</button>
+                    <span id="page-number">1</span>
+                    <button id="next-page">Вперёд</button>
+                </div>
+            </div>
+        </div>
+        <div class="budget">
+            <span>Бюджет: <span id="budget">100</span></span>
+            <button class="save-button">Сохранить</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
