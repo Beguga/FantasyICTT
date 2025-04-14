@@ -34,7 +34,7 @@ const playersData = [
     { name: "Мафина", position: "ПЗ", club: "Атлетико Горизонт", points: 0, price: 7, tourPoints: { 1: 0 } },
     { name: "Жоао Феликс", position: "НАП", club: "Атлетико Горизонт", points: 0, price: 8, tourPoints: { 1: 0 } },
     { name: "Яковлев Александр", position: "НАП", club: "Атлетико Горизонт", points: 0, price: 8, tourPoints: { 1: 0 } },
-    { name: "Александр Петров", position: "НАп", club: "Атлетико Горизонт", points: 0, price: 8, tourPoints: { 1: 0 } },
+    { name: "Александр Петров", position: "НАП", club: "Атлетико Горизонт", points: 0, price: 8, tourPoints: { 1: 0 } },
     { name: "Тимирбай Мансур", position: "НАП", club: "Атлетико Горизонт", points: 0, price: 8, tourPoints: { 1: 0 } },
     { name: "Ферсман Торрес", position: "НАП", club: "Атлетико Горизонт", points: 0, price: 8, tourPoints: { 1: 0 } },
     // Тюмень
@@ -271,55 +271,72 @@ function getLastCompletedTour() {
 }
 
 // Функция для отображения таблицы лидеров (с использованием Firebase)
-function displayLeaderboard() {
+async function displayLeaderboard() {
     const overallTableBody = document.querySelector("#overall-leaderboard tbody");
     const lastTourTableBody = document.querySelector("#last-tour-leaderboard tbody");
 
-    overallTableBody.innerHTML = "";
-    lastTourTableBody.innerHTML = "";
+    overallTableBody.innerHTML = "<tr><td colspan='3'>Загрузка...</td></tr>";
+    lastTourTableBody.innerHTML = "<tr><td colspan='3'>Загрузка...</td></tr>";
 
-    // Загружаем данные из Firebase
-    database.ref("users").once("value", snapshot => {
+    try {
+        // Загружаем данные из Firebase
+        const snapshot = await database.ref("users").once("value");
         const usersData = snapshot.val();
         const allUsersFirebase = usersData ? Object.values(usersData) : [];
 
-        // Фильтруем пользователей с валидными никами
-        const validUsers = allUsersFirebase.filter(user => user.nickname && user.nickname.trim() !== "");
+        // Фильтруем пользователей с валидными никами и данными
+        const validUsers = allUsersFirebase.filter(user => 
+            user.nickname && 
+            user.nickname.trim() !== "" && 
+            user.hasSavedTeam
+        );
 
         // Общий рейтинг
-        const overallSorted = [...validUsers].sort((a, b) => b.totalPoints - a.totalPoints);
-        overallSorted.forEach((user, index) => {
-            const row = document.createElement("tr");
-            row.innerHTML = `
-                <td>${index + 1}</td>
-                <td>${user.nickname}</td>
-                <td>${user.totalPoints || 0}</td>
-            `;
-            overallTableBody.appendChild(row);
-        });
-
-        // Рейтинг за последний тур
-        const lastTour = getLastCompletedTour();
-        if (lastTour) {
-            const lastTourSorted = [...validUsers].sort((a, b) => (b.tourPoints?.[lastTour.id] || 0) - (a.tourPoints?.[lastTour.id] || 0));
-            lastTourSorted.forEach((user, index) => {
-                const points = user.tourPoints?.[lastTour.id] || 0;
+        overallTableBody.innerHTML = "";
+        const overallSorted = [...validUsers].sort((a, b) => (b.totalPoints || 0) - (a.totalPoints || 0));
+        if (overallSorted.length === 0) {
+            overallTableBody.innerHTML = `<tr><td colspan="3">Нет данных</td></tr>`;
+        } else {
+            overallSorted.forEach((user, index) => {
                 const row = document.createElement("tr");
                 row.innerHTML = `
                     <td>${index + 1}</td>
                     <td>${user.nickname}</td>
-                    <td>${points}</td>
+                    <td>${user.totalPoints || 0}</td>
                 `;
-                lastTourTableBody.appendChild(row);
+                overallTableBody.appendChild(row);
             });
+        }
+
+        // Рейтинг за последний тур
+        lastTourTableBody.innerHTML = "";
+        const lastTour = getLastCompletedTour();
+        if (lastTour) {
+            const lastTourSorted = [...validUsers].sort((a, b) => 
+                (b.tourPoints?.[lastTour.id] || 0) - (a.tourPoints?.[lastTour.id] || 0)
+            );
+            if (lastTourSorted.length === 0) {
+                lastTourTableBody.innerHTML = `<tr><td colspan="3">Нет данных</td></tr>`;
+            } else {
+                lastTourSorted.forEach((user, index) => {
+                    const points = user.tourPoints?.[lastTour.id] || 0;
+                    const row = document.createElement("tr");
+                    row.innerHTML = `
+                        <td>${index + 1}</td>
+                        <td>${user.nickname}</td>
+                        <td>${points}</td>
+                    `;
+                    lastTourTableBody.appendChild(row);
+                });
+            }
         } else {
             lastTourTableBody.innerHTML = `<tr><td colspan="3">Нет завершённых туров</td></tr>`;
         }
-    }).catch(error => {
+    } catch (error) {
         console.error("Ошибка при загрузке данных для таблицы лидеров:", error);
         overallTableBody.innerHTML = `<tr><td colspan="3">Ошибка загрузки данных</td></tr>`;
         lastTourTableBody.innerHTML = `<tr><td colspan="3">Ошибка загрузки данных</td></tr>`;
-    });
+    }
 }
 
 // Проверяем, является ли пользователь новичком
@@ -328,38 +345,51 @@ function isNewUser() {
 }
 
 // Сохраняем данные пользователя (добавляем сохранение в Firebase)
-function saveUserData() {
-    localStorage.setItem("userData", JSON.stringify(userData));
-    const existingUserIndex = allUsers.findIndex(user => user.nickname === userData.nickname);
-    if (existingUserIndex !== -1) {
-        allUsers[existingUserIndex] = userData;
-    } else {
-        allUsers.push(userData);
-    }
-    localStorage.setItem("allUsers", JSON.stringify(allUsers));
+async function saveUserData() {
+    try {
+        // Сохраняем в localStorage
+        localStorage.setItem("userData", JSON.stringify(userData));
 
-    // Сохраняем данные пользователя в Firebase
-    if (userData.nickname && userData.nickname.trim() !== "") {
-        const userRef = database.ref("users/" + userData.nickname);
-        userRef.set({
-            nickname: userData.nickname,
-            favoriteClub: userData.favoriteClub,
-            totalPoints: userData.totalPoints || 0,
-            tourPoints: userData.tourPoints || {},
-            selectedPlayers: userData.selectedPlayers,
-            teamHistory: userData.teamHistory,
-            budget: userData.budget,
-            availableTransfers: userData.availableTransfers,
-            joinedTour: userData.joinedTour,
-            hasSavedTeam: userData.hasSavedTeam
-        }).catch(error => {
-            console.error("Ошибка при сохранении данных в Firebase:", error);
-        });
+        // Обновляем локальный список пользователей (для совместимости)
+        const existingUserIndex = allUsers.findIndex(user => user.nickname === userData.nickname);
+        if (existingUserIndex !== -1) {
+            allUsers[existingUserIndex] = { ...userData };
+        } else {
+            allUsers.push({ ...userData });
+        }
+        localStorage.setItem("allUsers", JSON.stringify(allUsers));
+
+        // Сохраняем данные пользователя в Firebase
+        if (userData.nickname && userData.nickname.trim() !== "") {
+            const userRef = database.ref("users/" + userData.nickname);
+            await userRef.set({
+                nickname: userData.nickname,
+                favoriteClub: userData.favoriteClub,
+                totalPoints: userData.totalPoints || 0,
+                tourPoints: userData.tourPoints || {},
+                selectedPlayers: userData.selectedPlayers || [],
+                teamHistory: userData.teamHistory || {},
+                budget: userData.budget || 100,
+                availableTransfers: userData.availableTransfers || 3,
+                joinedTour: userData.joinedTour || null,
+                hasSavedTeam: userData.hasSavedTeam || false
+            });
+        }
+    } catch (error) {
+        console.error("Ошибка при сохранении данных:", error);
+        throw error; // Передаем ошибку вызывающей функции
     }
 }
 
 // Основная логика
+// Основная логика
 document.addEventListener("DOMContentLoaded", function() {
+    // Проверка, запущен ли сайт через локальный сервер
+    if (window.location.protocol === "file:") {
+        console.warn("ВНИМАНИЕ: Сайт запущен через file:// протокол. Firebase требует http:// или https://. Запустите сайт через локальный сервер (например, Live Server в VS Code или python -m http.server).");
+        alert("Ошибка: Сайт запущен через file:// протокол. Пожалуйста, используйте локальный сервер (например, Live Server в VS Code) для корректной работы Firebase.");
+    }
+
     // Логика для fantasy.html
     const userForm = document.getElementById("user-form");
     if (userForm) {
@@ -367,31 +397,56 @@ document.addEventListener("DOMContentLoaded", function() {
         if (userDataStored) {
             const parsedUserData = JSON.parse(userDataStored);
             if (parsedUserData.nickname && parsedUserData.nickname.trim() !== "") {
+                console.log("Пользователь уже зарегистрирован, переход на team-selection.html");
                 window.location.href = "team-selection.html";
                 return;
             }
         }
 
-        userForm.addEventListener("submit", function(event) {
-            event.preventDefault();
+        userForm.addEventListener("submit", async function(event) {
+            event.preventDefault(); // Предотвращаем стандартное поведение формы
             const nickname = document.getElementById("nickname").value.trim();
             const favoriteClub = document.getElementById("favorite-club").value;
 
-            // Проверяем, существует ли пользователь в Firebase
-            database.ref("users/" + nickname).once("value", snapshot => {
+            console.log("Форма отправлена. Ник:", nickname, "Клуб:", favoriteClub);
+
+            if (!nickname || !favoriteClub) {
+                alert("Пожалуйста, заполните все поля!");
+                console.warn("Поля формы пустые");
+                return;
+            }
+
+            try {
+                // Проверяем, существует ли пользователь в Firebase
+                console.log("Проверка ника в Firebase по пути:", "users/" + nickname);
+                const snapshot = await database.ref("users/" + nickname).once("value");
+                console.log("Результат проверки ника:", snapshot.val());
                 if (snapshot.exists()) {
                     alert("Пользователь с таким ником уже существует! Пожалуйста, выберите другой ник.");
+                    console.warn("Ник уже существует в Firebase");
                     return;
                 }
 
+                // Сохраняем данные пользователя
                 userData.nickname = nickname;
                 userData.favoriteClub = favoriteClub;
-                saveUserData();
-                window.location.href = "team-selection.html";
-            }).catch(error => {
-                console.error("Ошибка при проверке ника в Firebase:", error);
-                alert("Произошла ошибка при проверке ника. Попробуйте снова.");
-            });
+                console.log("Сохранение данных пользователя...");
+                await saveUserData(); // Дожидаемся сохранения данных
+                console.log("Данные успешно сохранены, переход на team-selection.html");
+                window.location.href = "team-selection.html"; // Переходим на следующую страницу
+            } catch (error) {
+                console.error("Ошибка при проверке ника или сохранении данных в Firebase:", error);
+                if (error.code === "PERMISSION_DENIED") {
+                    console.error("Ошибка: Нет прав доступа. Проверьте правила Firebase.");
+                    alert("Ошибка: Нет прав доступа к базе данных. Обратитесь к администратору или проверьте правила Firebase.");
+                } else if (error.code === "NETWORK_ERROR") {
+                    console.error("Ошибка: Проблемы с сетью. Проверьте интернет-соединение.");
+                    alert("Ошибка: Проблемы с сетью. Проверьте ваше интернет-соединение и попробуйте снова.");
+                } else {
+                    console.error("Неизвестная ошибка:", error);
+                    alert("Произошла ошибка при обработке данных. Попробуйте снова. Подробности в консоли (F12 → Console).");
+                }
+            }
         });
     }
 
