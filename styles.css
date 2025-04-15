@@ -35,7 +35,7 @@ body.fantasy-page {
     box-sizing: border-box;
     position: absolute;
     top: 10%;
-    left: 20%; /* Исходное значение для ПК */
+    left: 20%; /* Восстановили исходное значение для ПК */
     transform: translateX(-50%);
 }
 
@@ -50,7 +50,7 @@ body.fantasy-page {
     display: flex;
     flex-direction: column;
     gap: 15px;
-    width: 450px; /* Исходное значение для ПК */
+    width: 450px; /* Восстановили исходное значение для ПК */
 }
 
 #user-form label {
@@ -73,12 +73,12 @@ body.fantasy-page {
     appearance: none;
     background: rgba(255, 255, 255, 0.1) url('images/arrow-down.png') no-repeat right 10px center;
     background-size: 20px;
-    color: white;
+    color: white; /* Исправили цвет текста на белый */
 }
 
 /* Кнопка "Далее" как спрайт */
 .next-button {
-    width: 300px; /* Исходное значение для ПК */
+    width: 300px; /* Восстановили исходное значение для ПК */
     height: 90px;
     background: url('images/button-sprite.png') no-repeat 0 0;
     background-size: 225px 45px;
@@ -217,7 +217,7 @@ body.team-selection-page {
 
 /* Основной контент: поле и список игроков */
 .team-selection-content {
-    display: flex; /* Исходное значение для ПК */
+    display: flex; /* Восстановили исходное значение для ПК */
     gap: 20px;
 }
 
@@ -226,7 +226,7 @@ body.team-selection-page {
     flex: 1;
     background: url('images/field.png') no-repeat center center;
     background-size: contain;
-    height: 500px; /* Исходное значение для ПК */
+    height: 500px; /* Восстановили исходное значение для ПК */
     position: relative;
 }
 
@@ -245,7 +245,7 @@ body.team-selection-page {
 
 /* Ячейки для игроков */
 .player-slot {
-    width: 60px; /* Исходное значение для ПК */
+    width: 60px; /* Восстановили исходное значение для ПК */
     height: 60px;
     background: rgba(255, 255, 255, 0.2);
     border: 2px solid white;
@@ -253,7 +253,7 @@ body.team-selection-page {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 0.8em; /* Исходное значение для ПК */
+    font-size: 0.8em; /* Восстановили исходное значение для ПК */
     text-align: center;
     cursor: pointer;
     position: relative;
@@ -268,14 +268,14 @@ body.team-selection-page {
     position: absolute;
     top: -10px;
     right: -10px;
-    width: 20px; /* Исходное значение для ПК */
+    width: 20px; /* Восстановили исходное значение для ПК */
     height: 20px;
     background: red;
     color: white;
     border: none;
     border-radius: 50%;
     cursor: pointer;
-    font-size: 0.8em; /* Исходное значение для ПК */
+    font-size: 0.8em; /* Восстановили исходное значение для ПК */
 }
 
 /* Список игроков */
@@ -284,8 +284,9 @@ body.team-selection-page {
     background: rgba(0, 0, 0, 0.8);
     padding: 20px;
     border-radius: 10px;
-    max-height: 600px; /* Исходное значение для ПК */
+    max-height: 600px; /* Восстановили исходное значение для ПК */
     overflow-y: auto;
+    z-index: 1; /* Установили z-index ниже, чем у таблицы лидеров */
 }
 
 .filters {
@@ -395,7 +396,7 @@ body.team-selection-page {
 }
 
 .save-button {
-    width: 300px; /* Исходное значение для ПК */
+    width: 300px; /* Восстановили исходное значение для ПК */
     height: 90px;
     background: url('images/save-button.png') no-repeat center center;
     background-size: 225px 45px;
@@ -458,6 +459,7 @@ body.team-selection-page {
     border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
+    z-index: 1001; /* Выше всех элементов */
 }
 
 #leaderboard-button:hover {
@@ -467,7 +469,7 @@ body.team-selection-page {
 .modal {
     display: none;
     position: fixed;
-    z-index: 1000;
+    z-index: 1000; /* Высокий z-index, чтобы быть выше всех */
     left: 0;
     top: 0;
     width: 100%;
@@ -483,12 +485,16 @@ body.team-selection-page {
     width: 80%;
     max-width: 600px;
     border-radius: 10px;
-    color: #333; /* Исходный цвет текста для ПК */
+    color: white; /* Текст белый */
 }
 
-.modal-content h2, .modal-content h3 {
-    color: #333; /* Исходный цвет текста для ПК */
+.modal-content h2 {
+    color: white; /* Текст белый */
     margin-bottom: 20px;
+}
+
+.modal-content h3 {
+    color: white; /* Текст белый */
 }
 
 .close {
@@ -500,9 +506,18 @@ body.team-selection-page {
 
 .close:hover,
 .close:focus {
-    color: black;
+    color: white; /* Текст белый при наведении */
     text-decoration: none;
     cursor: pointer;
+}
+
+#leaderboard-content {
+    margin-top: 20px;
+}
+
+#leaderboard-content h3 {
+    color: white; /* Текст белый */
+    margin-bottom: 10px;
 }
 
 table {
@@ -515,17 +530,17 @@ th, td {
     padding: 10px;
     text-align: left;
     border-bottom: 1px solid #ddd;
-    color: #333; /* Исходный цвет текста для ПК */
+    color: white; /* Текст белый */
 }
 
 th {
-    background-color: #f2f2f2;
-    color: #333; /* Исходный цвет текста для ПК */
+    background-color: #4CAF50; /* Изменили фон заголовков таблицы */
+    color: white; /* Текст белый */
 }
 
 td {
-    background-color: #ffffff;
-    color: #333; /* Исходный цвет текста для ПК */
+    background-color: #333; /* Серый фон для ячеек */
+    color: white; /* Текст белый */
 }
 
 /* Медиа-запросы для мобильных устройств (ширина экрана до 768px) */
@@ -634,8 +649,6 @@ td {
         width: 100%;
         padding: 10px;
         font-size: 1em;
-        background-color: #4CAF50; /* Зелёный фон для кнопки */
-        color: white;
     }
 
     /* Поле с составом */
@@ -653,8 +666,8 @@ td {
     }
 
     .goalkeepers, .defenders, .midfielders, .forwards {
-        justify-content: space-evenly; /* Чётко разделяем круги */
-        gap: 15px; /* Увеличиваем расстояние между кругами */
+        justify-content: space-around;
+        gap: 10px; /* Увеличили gap для разделения кругов */
         padding: 0 5px;
     }
 
@@ -675,13 +688,7 @@ td {
         width: 40px;
         height: 40px;
         font-size: 0.6em;
-        border-width: 1px; /* Уменьшаем толщину границы для читаемости */
-        background: rgba(255, 255, 255, 0.3); /* Делаем фон чуть ярче */
-        color: #000; /* Чёрный текст внутри кругов для контраста */
-    }
-
-    .player-slot.filled {
-        background: rgba(0, 255, 0, 0.4); /* Более яркий зелёный для заполненных */
+        margin: 0 5px;
     }
 
     .remove-player {
@@ -709,7 +716,7 @@ td {
         max-height: 400px;
         width: 100%;
         box-sizing: border-box;
-        background: rgba(0, 0, 0, 0.9); /* Более тёмный фон для контраста */
+        z-index: 1; /* Убедимся, что список ниже таблицы лидеров */
     }
 
     .filters {
@@ -722,8 +729,6 @@ td {
         font-size: 0.9em;
         width: 48%;
         box-sizing: border-box;
-        background: rgba(255, 255, 255, 0.2); /* Чуть ярче фон */
-        color: white;
     }
 
     .filters select:nth-child(3) {
@@ -736,7 +741,6 @@ td {
         padding: 8px;
         font-size: 0.8em;
         color: white;
-        background: rgba(255, 255, 255, 0.3); /* Чуть ярче фон */
     }
 
     .player {
@@ -745,7 +749,6 @@ td {
         padding: 8px;
         font-size: 0.8em;
         color: white;
-        background: rgba(255, 255, 255, 0.15); /* Чуть ярче фон */
     }
 
     .add-player {
@@ -792,49 +795,25 @@ td {
 
     /* Таблица лидеров */
     .modal {
-        z-index: 1000; /* Выше всех */
+        z-index: 1000; /* Убедимся, что таблица лидеров выше всех */
     }
 
     .modal-content {
         width: 90%;
         padding: 15px;
-        background: rgba(0, 0, 0, 0.9); /* Тёмный фон для таблицы */
-        color: white; /* Белый текст */
-        border: 2px solid #4CAF50; /* Зелёная рамка */
     }
 
     .modal-content h2 {
         font-size: 1.5em;
-        color: white; /* Белый текст */
     }
 
     .modal-content h3 {
         font-size: 1.2em;
-        color: white; /* Белый текст */
-    }
-
-    .close {
-        color: white; /* Белый текст */
-    }
-
-    .close:hover,
-    .close:focus {
-        color: #4CAF50; /* Зелёный при наведении */
     }
 
     th, td {
         padding: 8px;
         font-size: 0.9em;
-        color: white; /* Белый текст */
-    }
-
-    th {
-        background-color: #4CAF50; /* Зелёный фон заголовков */
-        color: white; /* Белый текст */
-    }
-
-    td {
-        background-color: rgba(255, 255, 255, 0.1); /* Полупрозрачный белый фон */
-        color: white; /* Белый текст */
+        color: white; /* Текст белый */
     }
 }
