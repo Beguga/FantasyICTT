@@ -207,26 +207,79 @@ body.team-selection-page {
     min-height: 100vh;
     box-sizing: border-box;
     color: white;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
 .team-selection-container h2 {
     font-size: 2em;
     text-transform: uppercase;
-    margin-bottom: 20px;
+    margin-bottom: 0;
 }
 
-/* Основной контент: поле и список игроков */
-.team-selection-content {
+/* Кнопка "Таблица лидеров" */
+#leaderboard-button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    align-self: flex-end;
+}
+
+#leaderboard-button:hover {
+    background-color: #45a049;
+}
+
+/* Панель туров */
+.tour-selection {
     display: flex;
-    gap: 20px;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.tour-button {
+    padding: 10px 20px;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: 2px solid white;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: 'Neue Machina', sans-serif;
+    font-weight: 700;
+    transition: background 0.3s ease;
+}
+
+.tour-button.active {
+    background: rgba(0, 255, 0, 0.3);
+}
+
+.tour-button.completed {
+    background: rgba(255, 0, 0, 0.3);
+}
+
+.tour-button:hover:not(.active):not(.completed) {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* Контейнер для поля */
+.field-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
 }
 
 /* Поле */
 .field {
-    flex: 1;
     background: url('images/field.png') no-repeat center center;
     background-size: contain;
     height: 500px;
+    width: 100%;
+    max-width: 600px;
     position: relative;
 }
 
@@ -234,8 +287,11 @@ body.team-selection-page {
 .goalkeepers, .defenders, .midfielders, .forwards {
     display: flex;
     justify-content: space-around;
+    align-items: center;
     position: absolute;
     width: 100%;
+    padding: 0 10px;
+    box-sizing: border-box;
 }
 
 .goalkeepers { top: 10%; }
@@ -257,6 +313,7 @@ body.team-selection-page {
     text-align: center;
     cursor: pointer;
     position: relative;
+    flex-shrink: 0;
 }
 
 .player-slot.filled {
@@ -278,20 +335,27 @@ body.team-selection-page {
     font-size: 0.8em;
 }
 
+/* Контейнер для списка игроков */
+.player-list-container {
+    width: 100%;
+}
+
 /* Список игроков */
 .player-list {
-    flex: 1;
     background: rgba(0, 0, 0, 0.8);
     padding: 20px;
     border-radius: 10px;
     max-height: 600px;
     overflow-y: auto;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .filters {
     display: flex;
     gap: 10px;
     margin-bottom: 20px;
+    flex-wrap: wrap;
 }
 
 .filters select {
@@ -300,6 +364,7 @@ body.team-selection-page {
     font-weight: 700;
     background: rgba(255, 255, 255, 0.1);
     border: 2px solid white;
+    color: white;
 }
 
 .filters select option {
@@ -316,9 +381,10 @@ body.team-selection-page {
     border-radius: 5px;
     font-weight: bold;
     text-align: center;
-    color: white; /* Текст белый */
+    color: white;
 }
 
+/* Список игроков */
 .players {
     display: flex;
     flex-direction: column;
@@ -335,7 +401,7 @@ body.team-selection-page {
     cursor: pointer;
     text-align: center;
     align-items: center;
-    color: white; /* Текст белый */
+    color: white;
 }
 
 .player:hover {
@@ -386,12 +452,20 @@ body.team-selection-page {
     cursor: not-allowed;
 }
 
-/* Бюджет и кнопка "Сохранить" */
-.budget {
-    margin-top: 20px;
+/* Нижняя секция: бюджет, очки, кнопка "Сохранить" */
+.footer-section {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    gap: 10px;
     align-items: center;
+}
+
+.budget {
+    font-size: 1.2em;
+}
+
+.tour-points {
+    font-size: 1.2em;
 }
 
 .save-button {
@@ -404,70 +478,16 @@ body.team-selection-page {
     text-indent: -9999px;
 }
 
-/* Очки за тур */
-.tour-points {
-    margin-top: 20px;
-    font-size: 1.2em;
-}
-
 /* Доступные замены */
 .transfers {
     font-size: 1.2em;
 }
 
-/* Стили для панели туров */
-.tour-selection {
-    margin-bottom: 20px;
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-}
-
-.tour-button {
-    padding: 10px 20px;
-    background: rgba(255, 255, 255, 0.1);
-    color: white;
-    border: 2px solid white;
-    border-radius: 5px;
-    cursor: pointer;
-    font-family: 'Neue Machina', sans-serif;
-    font-weight: 700;
-    transition: background 0.3s ease;
-}
-
-.tour-button.active {
-    background: rgba(0, 255, 0, 0.3);
-}
-
-.tour-button.completed {
-    background: rgba(255, 0, 0, 0.3);
-}
-
-.tour-button:hover:not(.active):not(.completed) {
-    background: rgba(255, 255, 255, 0.2);
-}
-
-#leaderboard-button {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    padding: 10px 20px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-}
-
-#leaderboard-button:hover {
-    background-color: #45a049;
-}
-
+/* Стили для модального окна */
 .modal {
     display: none;
     position: fixed;
-    z-index: 1000; /* Высокий z-index, чтобы быть выше всех */
+    z-index: 1000;
     left: 0;
     top: 0;
     width: 100%;
@@ -486,13 +506,9 @@ body.team-selection-page {
     color: #333;
 }
 
-.modal-content h2 {
+.modal-content h2, .modal-content h3 {
     color: #333;
     margin-bottom: 20px;
-}
-
-.modal-content h3 {
-    color: #333;
 }
 
 .close {
@@ -507,15 +523,6 @@ body.team-selection-page {
     color: black;
     text-decoration: none;
     cursor: pointer;
-}
-
-#leaderboard-content {
-    margin-top: 20px;
-}
-
-#leaderboard-content h3 {
-    color: #333;
-    margin-bottom: 10px;
 }
 
 table {
@@ -541,149 +548,114 @@ td {
     color: #333;
 }
 
+/* Стили для десктопов (ширина экрана больше 768px) */
+@media (min-width: 769px) {
+    .team-selection-container {
+        padding: 40px;
+    }
+
+    .team-selection-content {
+        display: flex;
+        gap: 20px;
+        flex-direction: row;
+    }
+
+    .field-container {
+        flex: 1;
+    }
+
+    .player-list-container {
+        flex: 1;
+    }
+
+    .field {
+        height: 500px;
+        max-width: 600px;
+    }
+
+    .player-slot {
+        width: 60px;
+        height: 60px;
+        font-size: 0.8em;
+    }
+
+    .remove-player {
+        width: 20px;
+        height: 20px;
+        font-size: 0.8em;
+    }
+
+    .player-list {
+        max-height: 600px;
+    }
+
+    .budget {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 20px;
+    }
+}
+
 /* Медиа-запросы для мобильных устройств (ширина экрана до 768px) */
 @media (max-width: 768px) {
-    /* Общие настройки */
     body {
         font-size: 14px;
     }
 
-    /* Главная страница (index.html) */
-    .logo {
-        width: 250px;
-        top: 15%;
-    }
-
-    .buttons {
-        top: 45%;
-        gap: 10px;
-    }
-
-    .menu-button {
-        width: 150px;
-    }
-
-    /* Страница Fantasy (fantasy.html) */
-    .fantasy-container {
-        padding: 20px;
-        top: 5%;
-        left: 50%;
-        transform: translateX(-50%);
-    }
-
-    .fantasy-container h2 {
-        font-size: 1.5em;
-        margin-bottom: 15px;
-    }
-
-    #user-form {
-        width: 100%;
-        max-width: 300px;
-        gap: 10px;
-    }
-
-    #user-form label {
-        font-size: 1em;
-    }
-
-    #user-form input,
-    #user-form select {
-        padding: 8px;
-        font-size: 0.9em;
-    }
-
-    .next-button {
-        width: 200px;
-        height: 60px;
-        background-size: 150px 30px;
-    }
-
-    /* Страница Info (info.html) */
-    .info-container {
-        padding: 60px 20px 20px 20px;
-    }
-
-    .back-arrow {
-        width: 30px;
-    }
-
-    .info-header h2 {
-        font-size: 1.5em;
-    }
-
-    .arrow {
-        width: 25px;
-    }
-
-    .info-content {
-        font-size: 0.9em;
-        padding: 15px 0;
-    }
-
-    .info-content h3.highlight {
-        font-size: 1.2em;
-    }
-
-    /* Страница Team Selection (team-selection.html) */
     .team-selection-container {
-        padding: 20px;
-        display: flex;
-        flex-direction: column;
-        gap: 15px;
+        padding: 15px;
+        gap: 10px;
     }
 
     .team-selection-container h2 {
         font-size: 1.5em;
-        margin-bottom: 0;
-        order: -1;
-        display: none;
+        display: block;
     }
 
-    /* Кнопка "Таблица лидеров" */
     #leaderboard-button {
-        position: static;
+        align-self: center;
         width: 100%;
         padding: 10px;
         font-size: 1em;
-        order: 1;
     }
 
-    /* Поле с составом */
-    .team-selection-content {
-        flex-direction: column;
-        gap: 15px;
-        order: 2;
+    .tour-selection {
+        gap: 5px;
+    }
+
+    .tour-button {
+        padding: 8px 15px;
+        font-size: 0.9em;
+    }
+
+    .field-container {
+        width: 100%;
     }
 
     .field {
         height: 400px;
-        background-size: contain;
         width: 100%;
+        max-width: 400px;
+        background-size: contain;
     }
 
     .goalkeepers, .defenders, .midfielders, .forwards {
-        justify-content: space-around; /* Равномерное распределение */
-        gap: 5px; /* Уменьшаем промежутки между кругами */
+        justify-content: space-around;
+        gap: 5px;
+        padding: 0 5px;
     }
 
-    .goalkeepers {
-        top: 5%;
-    }
-    .defenders {
-        top: 25%;
-    }
-    .midfielders {
-        top: 50%;
-    }
-    .forwards {
-        top: 75%;
-    }
+    .goalkeepers { top: 5%; }
+    .defenders { top: 25%; }
+    .midfielders { top: 50%; }
+    .forwards { top: 75%; }
 
     .player-slot {
-        width: 40px; /* Уменьшаем размер кругов */
-        height: 40px;
+        width: 45px;
+        height: 45px;
         font-size: 0.6em;
-        margin: 0 5px; /* Добавляем отступы для предотвращения наложения */
+        border-width: 1px;
     }
 
     .remove-player {
@@ -694,31 +666,9 @@ td {
         right: -6px;
     }
 
-    /* Панель туров */
-    .tour-selection {
-        gap: 5px;
-        flex-wrap: wrap;
-        order: 3;
-    }
-
-    .tour-button {
-        padding: 8px 15px;
-        font-size: 0.9em;
-    }
-
-    /* Список игроков */
     .player-list {
         padding: 15px;
         max-height: 400px;
-        width: 100%;
-        box-sizing: border-box;
-        order: 4;
-        z-index: 1; /* Низкий z-index, чтобы быть под таблицей лидеров */
-    }
-
-    .filters {
-        flex-wrap: wrap;
-        gap: 8px;
     }
 
     .filters select {
@@ -737,7 +687,6 @@ td {
         gap: 5px;
         padding: 8px;
         font-size: 0.8em;
-        color: white; /* Текст белый */
     }
 
     .player {
@@ -745,7 +694,6 @@ td {
         gap: 5px;
         padding: 8px;
         font-size: 0.8em;
-        color: white; /* Текст белый */
     }
 
     .add-player {
@@ -754,7 +702,6 @@ td {
         font-size: 1em;
     }
 
-    /* Пагинация */
     .pagination {
         gap: 5px;
         margin-top: 15px;
@@ -765,15 +712,11 @@ td {
         font-size: 0.9em;
     }
 
-    /* Бюджет, очки и кнопка "Сохранить" */
-    .budget {
-        flex-direction: column;
+    .footer-section {
         gap: 10px;
-        align-items: flex-start;
-        order: 5;
     }
 
-    .budget span {
+    .budget, .tour-points, .transfers {
         font-size: 1em;
     }
 
@@ -781,20 +724,6 @@ td {
         width: 200px;
         height: 60px;
         background-size: 150px 30px;
-    }
-
-    .tour-points {
-        font-size: 1em;
-        order: 6;
-    }
-
-    .transfers {
-        font-size: 1em;
-    }
-
-    /* Таблица лидеров */
-    .modal {
-        z-index: 1000; /* Убедимся, что таблица лидеров выше всех */
     }
 
     .modal-content {

@@ -83,23 +83,46 @@ const playersData = [
     { name: "Юлиан Пьере", position: "НАП", club: "Ритховен", points: 0, price: 8, tourPoints: { 1: 0 } },
     { name: "Йерун Ван Дер Мерве", position: "НАП", club: "Ритховен", points: 0, price: 8, tourPoints: { 1: 0 } },
     // Братислава
-    { name: "Бруно Кёйперс", position: "ВР", club: "Ритховен", points: 0, price: 5, tourPoints: { 1: 0 } },
-    { name: "Лукаш Джошевич", position: "ВР", club: "Ритховен", points: 0, price: 5, tourPoints: { 1: 0 } },
-    { name: "Томми Нимери", position: "ЗЩ", club: "Ритховен", points: 0, price: 6, tourPoints: { 1: 0 } },
-    { name: "Этхан Морено", position: "ЗЩ", club: "Ритховен", points: 0, price: 6, tourPoints: { 1: 0 } },
-    { name: "Джейкоб Кумба", position: "ЗЩ", club: "Ритховен", points: 0, price: 6, tourPoints: { 1: 0 } },
-    { name: "Максим Милошевич", position: "ЗЩ", club: "Ритховен", points: 0, price: 6, tourPoints: { 1: 0 } },
-    { name: "Джереми Джеймс", position: "ЗЩ", club: "Ритховен", points: 0, price: 6, tourPoints: { 1: 0 } },
-    { name: "Стюарт Декстер-Драммонд", position: "ПЗ", club: "Ритховен", points: 0, price: 7, tourPoints: { 1: 0 } },
-    { name: "Джейден Амасс", position: "ПЗ", club: "Ритховен", points: 0, price: 7, tourPoints: { 1: 0 } },
-    { name: "Йелле Ван Дер Мер", position: "ПЗ", club: "Ритховен", points: 0, price: 7, tourPoints: { 1: 0 } },
-    { name: "Энту Криси", position: "ПЗ", club: "Ритховен", points: 0, price: 7, tourPoints: { 1: 0 } },
-    { name: "Яковлев Александр", position: "ПЗ", club: "Ритховен", points: 0, price: 7, tourPoints: { 1: 0 } },
-    { name: "Эллиас Веннестра", position: "ПЗ", club: "Ритховен", points: 0, price: 7, tourPoints: { 1: 0 } },
-    { name: "Рио Нгема", position: "НАП", club: "Ритховен", points: 0, price: 8, tourPoints: { 1: 0 } },
-    { name: "Джек Крионель", position: "НАП", club: "Ритховен", points: 0, price: 8, tourPoints: { 1: 0 } },
-    { name: "Юлиан Пьере", position: "НАП", club: "Ритховен", points: 0, price: 8, tourPoints: { 1: 0 } },
-    { name: "Йерун Ван Дер Мерве", position: "НАП", club: "Ритховен", points: 0, price: 8, tourPoints: { 1: 0 } },
+    { name: "Роман Ранни", position: "ВР", club: "РБ Братислава", points: 0, price: 5, tourPoints: { 1: 0 } },
+    { name: "Лемар Ср", position: "ЗЩ", club: "РБ Братислава", points: 0, price: 6, tourPoints: { 1: 0 } },
+    { name: "Демир Фьер", position: "ЗЩ", club: "РБ Братислава", points: 0, price: 6, tourPoints: { 1: 0 } },
+    { name: "Франсуа Депардье", position: "ЗЩ", club: "РБ Братислава", points: 0, price: 6, tourPoints: { 1: 0 } },
+    { name: "Хендерсон Гэрри", position: "ПЗ", club: "РБ Братислава", points: 0, price: 7, tourPoints: { 1: 0 } },
+    { name: "Бруно Факучо", position: "ПЗ", club: "РБ Братислава", points: 0, price: 7, tourPoints: { 1: 0 } },
+    { name: "Тьяго Дживано", position: "ПЗ", club: "РБ Братислава", points: 0, price: 7, tourPoints: { 1: 0 } },
+    { name: "Алеш Карлосон", position: "ПЗ", club: "РБ Братислава", points: 0, price: 7, tourPoints: { 1: 0 } },
+    { name: "Аарон Тосин", position: "НАП", club: "РБ Братислава", points: 0, price: 8, tourPoints: { 1: 0 } },
+    { name: "Ансворт Рейган", position: "НАП", club: "РБ Братислава", points: 0, price: 8, tourPoints: { 1: 0 } },
+    { name: "Александр Эшвиль", position: "НАП", club: "РБ Братислава", points: 0, price: 8, tourPoints: { 1: 0 } },
+    // Капро
+    { name: "Тайлер Мортон", position: "ВР", club: "Капро", points: 0, price: 4, tourPoints: { 1: 0 } },
+    { name: "Даниил Квят", position: "ЗЩ", club: "Капро", points: 0, price: 5, tourPoints: { 1: 0 } },
+    { name: "Михаель Мбайе", position: "ЗЩ", club: "Капро", points: 0, price: 5, tourPoints: { 1: 0 } },
+    { name: "Данила Козлов", position: "ЗЩ", club: "Капро", points: 0, price: 5, tourPoints: { 1: 0 } },
+    { name: "Абдумали Гасан", position: "ЗЩ", club: "Капро", points: 0, price: 5, tourPoints: { 1: 0 } },
+    { name: "Андре Классен", position: "ЗЩ", club: "Капро", points: 0, price: 5, tourPoints: { 1: 0 } },
+    { name: "Стефан Гуантомеро", position: "ПЗ", club: "Капро", points: 0, price: 6, tourPoints: { 1: 0 } },
+    { name: "Мартин Холар", position: "ПЗ", club: "Капро", points: 0, price: 6, tourPoints: { 1: 0 } },
+    { name: "Григори Рохас", position: "ПЗ", club: "Капро", points: 0, price: 6, tourPoints: { 1: 0 } },
+    { name: "Кирил Мэсси", position: "ПЗ", club: "Капро", points: 0, price: 6, tourPoints: { 1: 0 } },
+    { name: "Рой Фергюсон", position: "НАП", club: "Капро", points: 0, price: 7, tourPoints: { 1: 0 } },
+    { name: "Ларан Кусанье", position: "НАП", club: "Капро", points: 0, price: 7, tourPoints: { 1: 0 } },
+    { name: "Меркель Степлер", position: "НАП", club: "Капро", points: 0, price: 7, tourPoints: { 1: 0 } },
+    // Ласфьеро
+    { name: "Элеман Ле Мануель", position: "ВР", club: "Лас Фьеро", points: 0, price: 4, tourPoints: { 1: 0 } },
+    { name: "Хорхе Санчез", position: "ЗЩ", club: "Лас Фьеро", points: 0, price: 5, tourPoints: { 1: 0 } },
+    { name: "Ян Удасто", position: "ЗЩ", club: "Лас Фьеро", points: 0, price: 5, tourPoints: { 1: 0 } },
+    { name: "Игорь Селихов", position: "ЗЩ", club: "Лас Фьеро", points: 0, price: 5, tourPoints: { 1: 0 } },
+    { name: "Янг Транни", position: "ЗЩ", club: "Лас Фьеро", points: 0, price: 5, tourPoints: { 1: 0 } },
+    { name: "Пушнинуф Диффи", position: "ПЗ", club: "Лас Фьеро", points: 0, price: 6, tourPoints: { 1: 0 } },
+    { name: "Райо Гайоли", position: "ПЗ", club: "Лас Фьеро", points: 0, price: 6, tourPoints: { 1: 0 } },
+    { name: "Альфонсо Мартин", position: "ПЗ", club: "Лас Фьеро", points: 0, price: 6, tourPoints: { 1: 0 } },
+    { name: "Амир Ахметзянов", position: "НАП", club: "Лас Фьеро", points: 0, price: 7, tourPoints: { 1: 0 } },
+    { name: "Маркус Джордж", position: "НАП", club: "Лас Фьеро", points: 0, price: 7, tourPoints: { 1: 0 } },
+    { name: "Артём Агаларов", position: "НАП", club: "Лас Фьеро", points: 0, price: 7, tourPoints: { 1: 0 } },
+    { name: "Джастин Ханимбер", position: "НАП", club: "Лас Фьеро", points: 0, price: 7, tourPoints: { 1: 0 } },
+    { name: "Иньяки Реми", position: "НАП", club: "Лас Фьеро", points: 0, price: 7, tourPoints: { 1: 0 } },
+
 
 
     { name: "Тимирбай Мансур", position: "НАП", club: "Атлетико Горизонт", points: 0, price: 8, tourPoints: { 1: 0 } },
@@ -591,14 +614,15 @@ document.addEventListener("DOMContentLoaded", function() {
     displayTourPoints(selectedTourId);
 
     // Отображение доступных замен
+    // Отображение доступных замен
     const transfersDiv = document.createElement("div");
     transfersDiv.classList.add("transfers");
     if (!isNewUser() && isTransferMode) {
         transfersDiv.innerHTML = `<span>Доступные замены: <span id="transfers-count">${userData.availableTransfers}</span></span>`;
     } else {
-        transfersDiv.innerHTML = `<span>Соберите и сохраните состав</span>`;
+     transfersDiv.innerHTML = `<span>Соберите и сохраните состав</span>`;
     }
-    document.querySelector(".budget").prepend(transfersDiv);
+    document.querySelector(".footer-section").prepend(transfersDiv);
 
     // Восстанавливаем состав
     if (userData.selectedPlayers.length > 0) {
