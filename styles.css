@@ -689,44 +689,4 @@ td {
         padding: 8px;
         font-size: 0.9em;
     }
-
-    /* Страница Info (info.html) */
-    .info-container {
-        padding: 60px 20px 20px 20px;
-        width: 100%;
-        box-sizing: border-box;
-    }
-
-    .back-button {
-        top: 15px;
-        left: 15px;
-    }
-
-    .back-arrow {
-        width: 30px;
-    }
-
-    .info-header {
-        gap: 8px;
-    }
-
-    .info-header h2 {
-        font-size: 1.5em;
-        margin: 15px 0;
-    }
-
-    .arrow {
-        width: 25px;
-    }
-
-    .info-content {
-        font-size: 0.9em;
-        padding: 15px 0;
-        max-width: 100%;
-        margin: 0 10px;
-    }
-
-    .info-content h3.highlight {
-        font-size: 1.2em;
-    }
 }
