@@ -28,6 +28,7 @@ body.fantasy-page {
 }
 
 /* Контейнер для страницы Fantasy */
+/* Контейнер для страницы Fantasy */
 .fantasy-container {
     padding: 40px;
     text-align: center;
@@ -35,8 +36,10 @@ body.fantasy-page {
     box-sizing: border-box;
     position: absolute;
     top: 10%;
-    left: 20%;
+    left: 50%; /* Изменили left на 50%, чтобы центрировать */
     transform: translateX(-50%);
+    width: 100%; /* Добавили ширину 100% */
+    max-width: 600px; /* Ограничиваем максимальную ширину для десктопов */
 }
 
 .fantasy-container h2 {
@@ -51,6 +54,7 @@ body.fantasy-page {
     flex-direction: column;
     gap: 15px;
     width: 450px;
+    margin: 0 auto; /* Центрируем форму */
 }
 
 #user-form label {
@@ -73,7 +77,7 @@ body.fantasy-page {
     appearance: none;
     background: rgba(255, 255, 255, 0.1) url('images/arrow-down.png') no-repeat right 10px center;
     background-size: 20px;
-    color: black;
+    color: white; /* Изменили цвет текста на белый для читаемости */
 }
 
 /* Кнопка "Далее" как спрайт */
@@ -85,6 +89,54 @@ body.fantasy-page {
     border: none;
     cursor: pointer;
     text-indent: -9999px;
+    align-self: center; /* Центрируем кнопку */
+}
+
+/* Медиа-запросы для мобильных устройств (ширина экрана до 768px) */
+@media (max-width: 768px) {
+    /* Общие настройки */
+    body {
+        font-size: 14px;
+    }
+
+    /* Страница Fantasy (fantasy.html) */
+    .fantasy-container {
+        padding: 20px;
+        top: 5%; /* Уменьшаем отступ сверху */
+        max-width: 100%; /* Убираем ограничение ширины */
+    }
+
+    .fantasy-container h2 {
+        font-size: 1.5em; /* Уменьшаем размер заголовка */
+        margin-bottom: 15px;
+    }
+
+    #user-form {
+        width: 100%; /* Форма занимает всю ширину */
+        max-width: 320px; /* Ограничиваем максимальную ширину формы */
+        gap: 10px; /* Уменьшаем промежутки между элементами */
+    }
+
+    #user-form label {
+        font-size: 1em; /* Уменьшаем размер текста меток */
+    }
+
+    #user-form input,
+    #user-form select {
+        padding: 8px; /* Уменьшаем внутренние отступы */
+        font-size: 0.9em; /* Уменьшаем размер шрифта */
+    }
+
+    #user-form select {
+        background-size: 16px; /* Уменьшаем размер стрелки */
+        background-position: right 8px center; /* Корректируем позицию стрелки */
+    }
+
+    .next-button {
+        width: 200px; /* Уменьшаем размер кнопки */
+        height: 60px;
+        background-size: 150px 30px; /* Уменьшаем размер спрайта */
+    }
 }
 
 /* Стили для страницы Info */
