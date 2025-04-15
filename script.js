@@ -842,3 +842,28 @@ document.addEventListener("DOMContentLoaded", function() {
     positionFilter.addEventListener("change", () => { currentPage = 1; renderPlayers(); });
     sortFilter.addEventListener("change", () => { currentPage = 1; renderPlayers(); });
 });
+// В конец файла script.js
+document.addEventListener("DOMContentLoaded", function() {
+    // Оптимизация для мобильных устройств
+    if (window.innerWidth <= 768) {
+        // Улучшаем обработку кликов на мобильных устройствах
+        document.querySelectorAll('.player-slot').forEach(slot => {
+            slot.style.cursor = 'pointer';
+        });
+
+        // Увеличиваем область клика для кнопок
+        document.querySelectorAll('button').forEach(button => {
+            button.style.minHeight = '44px'; // Рекомендуемый минимальный размер для касаний
+        });
+
+        // Улучшаем отображение фильтров
+        const filters = document.querySelector('.filters');
+        if (filters) {
+            filters.style.position = 'sticky';
+            filters.style.top = '0';
+            filters.style.background = 'rgba(0,0,0,0.8)';
+            filters.style.zIndex = '100';
+            filters.style.padding = '10px 0';
+        }
+    }
+});
