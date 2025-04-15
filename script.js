@@ -197,7 +197,7 @@ const playersData = [
   { name: "Накатика Явъебука", position: "ЗЩ", club: "Гладиатор", points: 0, price: 4, tourPoints: { 1: 0 } },
   { name: "Евгений Джикия", position: "ЗЩ", club: "Гладиатор", points: 0, price: 4, tourPoints: { 1: 0, 2: 0 } },
   { name: "Антон Чернов", position: "ЗЩ", club: "Гладиатор", points: 0, price: 4, tourPoints: { 1: 0 } },
-  { name: "Иван Резок", position: "ПЗ", club: "Гладиатор", points: 0, price: 5, tourPoints: { 1: 0 } },
+  { name: "Иван Резок", position: "НАП", club: "Гладиатор", points: 0, price: 5, tourPoints: { 1: 0 } },
   { name: "Марти Перейра", position: "ПЗ", club: "Гладиатор", points: 0, price: 5, tourPoints: { 1: 0 } },
   { name: "Дмитрий Игнатов", position: "ПЗ", club: "Гладиатор", points: 0, price: 5, tourPoints: { 1: 0 } },
   { name: "Данила Пруцев", position: "ПЗ", club: "Гладиатор", points: 0, price: 5, tourPoints: { 1: 0 } },
@@ -508,8 +508,11 @@ function getLastCompletedTour() {
 }
 
 // Функция для отображения таблицы лидеров (с использованием Firebase)
+// Функция для отображения таблицы лидеров (с использованием Firebase)
 async function displayLeaderboard() {
     const leaderboardTableBody = document.querySelector("#leaderboard-table tbody");
+    const personalRankContainer = document.querySelector("#personal-rank") || document.createElement("div");
+    personalRankContainer.id = "personal-rank";
 
     if (!leaderboardTableBody) {
         console.warn("Элемент таблицы лидеров не найден");
@@ -517,6 +520,7 @@ async function displayLeaderboard() {
     }
 
     leaderboardTableBody.innerHTML = "<tr><td colspan='4'>Загрузка...</td></tr>";
+    personalRankContainer.innerHTML = "<p>Загрузка вашего места...</p>";
 
     try {
         // Загружаем данные из Firebase по пути /leaderboard
@@ -532,10 +536,11 @@ async function displayLeaderboard() {
         // Сортируем по убыванию очков
         leaderboardData.sort((a, b) => (b.score || 0) - (a.score || 0));
 
-        // Отображаем данные в таблице
+        // Отображаем топ-10
         leaderboardTableBody.innerHTML = "";
         if (leaderboardData.length === 0) {
             leaderboardTableBody.innerHTML = `<tr><td colspan="4">Нет данных</td></tr>`;
+            personalRankContainer.innerHTML = `<p>Нет данных</p>`;
         } else {
             leaderboardData.slice(0, 10).forEach((entry, index) => {
                 const row = document.createElement("tr");
@@ -547,10 +552,34 @@ async function displayLeaderboard() {
                 `;
                 leaderboardTableBody.appendChild(row);
             });
+
+            // Находим место текущего пользователя
+            const currentUser = leaderboardData.find(entry => entry.nickname === userData.nickname);
+            if (currentUser) {
+                const userIndex = leaderboardData.findIndex(entry => entry.nickname === userData.nickname) + 1;
+                personalRankContainer.innerHTML = `
+                    <table>
+                        <tr>
+                            <td>${userIndex}</td>
+                            <td>${currentUser.nickname}</td>
+                            <td>${currentUser.score}</td>
+                            <td>${currentUser.favoriteClub}</td>
+                        </tr>
+                    </table>
+                `;
+            } else {
+                personalRankContainer.innerHTML = `<p>Ваш ник "${userData.nickname}" не найден в таблице лидеров.</p>`;
+            }
+        }
+
+        // Добавляем personalRankContainer в DOM, если его там ещё нет
+        if (!document.querySelector("#personal-rank")) {
+            document.querySelector("#leaderboard-content").appendChild(personalRankContainer);
         }
     } catch (error) {
         console.error("Ошибка при загрузке данных для таблицы лидеров:", error);
         leaderboardTableBody.innerHTML = `<tr><td colspan="4">Ошибка загрузки данных</td></tr>`;
+        personalRankContainer.innerHTML = `<p>Ошибка загрузки вашего места</p>`;
     }
 }
 
@@ -1095,6 +1124,8 @@ document.addEventListener("DOMContentLoaded", function() {
             userForm.querySelectorAll('input, select').forEach(input => {
                 input.style.width = '100%'; // Убедимся, что поля занимают всю ширину
                 input.style.boxSizing = 'border-box';
+                input.style.fontSize = '16px'; // Минимальный размер шрифта для читаемости
+                input.style.height = '44px'; // Минимальная высота для касаний
             });
 
             const nextButton = userForm.querySelector('.next-button');
@@ -1102,6 +1133,8 @@ document.addEventListener("DOMContentLoaded", function() {
                 nextButton.style.minHeight = '44px'; // Минимальный размер для касаний
                 nextButton.style.width = '100%'; // Кнопка на всю ширину формы
                 nextButton.style.maxWidth = '200px'; // Ограничиваем ширину
+                nextButton.style.margin = '0 auto'; // Центрируем
+                nextButton.style.display = 'block'; // Убедимся, что кнопка отображается как блок
             }
         }
     }
