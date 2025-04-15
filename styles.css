@@ -33,10 +33,10 @@ body.fantasy-page {
     text-align: center;
     min-height: 100vh;
     box-sizing: border-box;
-    position: absolute; /* Добавляем позиционирование */
-    top: 10%; /* Смещаем по Y */
-    left: 20%; /* Смещаем по X */
-    transform: translateX(-50%); /* Центрируем по X относительно left */
+    position: absolute;
+    top: 10%;
+    left: 20%;
+    transform: translateX(-50%);
 }
 
 .fantasy-container h2 {
@@ -64,7 +64,7 @@ body.fantasy-page {
     font-size: 1em;
     border: 2px solid white;
     background: rgba(255, 255, 255, 0.1);
-    color: white; /* Цвет текста для input остаётся белым */
+    color: white;
     font-family: 'Neue Machina', sans-serif;
     font-weight: 700;
 }
@@ -73,15 +73,15 @@ body.fantasy-page {
     appearance: none;
     background: rgba(255, 255, 255, 0.1) url('images/arrow-down.png') no-repeat right 10px center;
     background-size: 20px;
-    color: black; /* Переопределяем цвет текста для select */
+    color: black;
 }
 
 /* Кнопка "Далее" как спрайт */
 .next-button {
-    width: 300px; /* Увеличиваем ширину */
-    height: 90px; /* Высота остаётся прежней */
+    width: 300px;
+    height: 90px;
     background: url('images/button-sprite.png') no-repeat 0 0;
-    background-size: 225px 45px; /* Обновляем размер спрайта: ширина 250px, высота 100px (2 состояния) */
+    background-size: 225px 45px;
     border: none;
     cursor: pointer;
     text-indent: -9999px;
@@ -206,7 +206,7 @@ body.team-selection-page {
     padding: 40px;
     min-height: 100vh;
     box-sizing: border-box;
-    color: white; /* Текст по умолчанию белый */
+    color: white;
 }
 
 .team-selection-container h2 {
@@ -300,11 +300,10 @@ body.team-selection-page {
     font-weight: 700;
     background: rgba(255, 255, 255, 0.1);
     border: 2px solid white;
-    /* Убрали color: black, чтобы текст наследовал белый цвет от .team-selection-container */
 }
 
 .filters select option {
-    color: black; /* Текст в опциях остаётся чёрным */
+    color: black;
 }
 
 /* Заголовок столбцов */
@@ -317,6 +316,7 @@ body.team-selection-page {
     border-radius: 5px;
     font-weight: bold;
     text-align: center;
+    color: white; /* Текст белый */
 }
 
 .players {
@@ -335,6 +335,7 @@ body.team-selection-page {
     cursor: pointer;
     text-align: center;
     align-items: center;
+    color: white; /* Текст белый */
 }
 
 .player:hover {
@@ -394,10 +395,10 @@ body.team-selection-page {
 }
 
 .save-button {
-    width: 300px; /* Увеличиваем ширину */
-    height: 90px; /* Высота остаётся прежней */
+    width: 300px;
+    height: 90px;
     background: url('images/save-button.png') no-repeat center center;
-    background-size: 225px 45px; /* Обновляем размер спрайта: ширина 250px, высота 100px (2 состояния) */
+    background-size: 225px 45px;
     border: none;
     cursor: pointer;
     text-indent: -9999px;
@@ -435,11 +436,11 @@ body.team-selection-page {
 }
 
 .tour-button.active {
-    background: rgba(0, 255, 0, 0.3); /* Подсвечиваем активный тур */
+    background: rgba(0, 255, 0, 0.3);
 }
 
 .tour-button.completed {
-    background: rgba(255, 0, 0, 0.3); /* Завершённые туры */
+    background: rgba(255, 0, 0, 0.3);
 }
 
 .tour-button:hover:not(.active):not(.completed) {
@@ -466,7 +467,7 @@ body.team-selection-page {
 .modal {
     display: none;
     position: fixed;
-    z-index: 1;
+    z-index: 1000; /* Высокий z-index, чтобы быть выше всех */
     left: 0;
     top: 0;
     width: 100%;
@@ -482,16 +483,16 @@ body.team-selection-page {
     width: 80%;
     max-width: 600px;
     border-radius: 10px;
-    color: #333 !important;
+    color: #333;
 }
 
 .modal-content h2 {
-    color: #333 !important;
+    color: #333;
     margin-bottom: 20px;
 }
 
 .modal-content h3 {
-    color: #333 !important;
+    color: #333;
 }
 
 .close {
@@ -513,7 +514,7 @@ body.team-selection-page {
 }
 
 #leaderboard-content h3 {
-    color: #333 !important;
+    color: #333;
     margin-bottom: 10px;
 }
 
@@ -544,12 +545,12 @@ td {
 @media (max-width: 768px) {
     /* Общие настройки */
     body {
-        font-size: 14px; /* Уменьшаем базовый размер шрифта */
+        font-size: 14px;
     }
 
     /* Главная страница (index.html) */
     .logo {
-        width: 250px; /* Уменьшаем логотип */
+        width: 250px;
         top: 15%;
     }
 
@@ -559,7 +560,7 @@ td {
     }
 
     .menu-button {
-        width: 150px; /* Уменьшаем кнопки */
+        width: 150px;
     }
 
     /* Страница Fantasy (fantasy.html) */
@@ -634,8 +635,8 @@ td {
     .team-selection-container h2 {
         font-size: 1.5em;
         margin-bottom: 0;
-        order: -1; /* Заголовок убираем, так как он не нужен в мобильной версии */
-        display: none; /* Скрываем заголовок */
+        order: -1;
+        display: none;
     }
 
     /* Кнопка "Таблица лидеров" */
@@ -644,45 +645,60 @@ td {
         width: 100%;
         padding: 10px;
         font-size: 1em;
-        order: 1; /* Помещаем в начало */
+        order: 1;
     }
 
     /* Поле с составом */
     .team-selection-content {
         flex-direction: column;
         gap: 15px;
-        order: 2; /* Поле идёт вторым */
+        order: 2;
     }
 
     .field {
-        height: 400px; /* Уменьшаем высоту поля */
+        height: 400px;
         background-size: contain;
         width: 100%;
     }
 
     .goalkeepers, .defenders, .midfielders, .forwards {
-        justify-content: space-evenly;
+        justify-content: space-around; /* Равномерное распределение */
+        gap: 5px; /* Уменьшаем промежутки между кругами */
+    }
+
+    .goalkeepers {
+        top: 5%;
+    }
+    .defenders {
+        top: 25%;
+    }
+    .midfielders {
+        top: 50%;
+    }
+    .forwards {
+        top: 75%;
     }
 
     .player-slot {
-        width: 45px;
-        height: 45px;
-        font-size: 0.7em;
+        width: 40px; /* Уменьшаем размер кругов */
+        height: 40px;
+        font-size: 0.6em;
+        margin: 0 5px; /* Добавляем отступы для предотвращения наложения */
     }
 
     .remove-player {
-        width: 18px;
-        height: 18px;
-        font-size: 0.7em;
-        top: -8px;
-        right: -8px;
+        width: 16px;
+        height: 16px;
+        font-size: 0.6em;
+        top: -6px;
+        right: -6px;
     }
 
     /* Панель туров */
     .tour-selection {
         gap: 5px;
-        flex-wrap: wrap; /* Позволяем кнопкам переноситься */
-        order: 3; /* Панель туров идёт третьей */
+        flex-wrap: wrap;
+        order: 3;
     }
 
     .tour-button {
@@ -696,23 +712,24 @@ td {
         max-height: 400px;
         width: 100%;
         box-sizing: border-box;
-        order: 4; /* Список игроков четвёртый */
+        order: 4;
+        z-index: 1; /* Низкий z-index, чтобы быть под таблицей лидеров */
     }
 
     .filters {
-        flex-wrap: wrap; /* Фильтры могут переноситься */
+        flex-wrap: wrap;
         gap: 8px;
     }
 
     .filters select {
         padding: 8px;
         font-size: 0.9em;
-        width: 48%; /* Два фильтра в ряд */
+        width: 48%;
         box-sizing: border-box;
     }
 
     .filters select:nth-child(3) {
-        width: 100%; /* Последний фильтр (сортировка) на всю ширину */
+        width: 100%;
     }
 
     .player-header {
@@ -720,6 +737,7 @@ td {
         gap: 5px;
         padding: 8px;
         font-size: 0.8em;
+        color: white; /* Текст белый */
     }
 
     .player {
@@ -727,6 +745,7 @@ td {
         gap: 5px;
         padding: 8px;
         font-size: 0.8em;
+        color: white; /* Текст белый */
     }
 
     .add-player {
@@ -751,7 +770,7 @@ td {
         flex-direction: column;
         gap: 10px;
         align-items: flex-start;
-        order: 5; /* В конце */
+        order: 5;
     }
 
     .budget span {
@@ -766,7 +785,7 @@ td {
 
     .tour-points {
         font-size: 1em;
-        order: 6; /* Очки за тур после бюджета */
+        order: 6;
     }
 
     .transfers {
@@ -774,6 +793,10 @@ td {
     }
 
     /* Таблица лидеров */
+    .modal {
+        z-index: 1000; /* Убедимся, что таблица лидеров выше всех */
+    }
+
     .modal-content {
         width: 90%;
         padding: 15px;
