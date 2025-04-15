@@ -191,6 +191,38 @@ const playersData = [
    { name: "Мартин Энжер", position: "НАП", club: "Мелитополь", points: 0, price: 6, tourPoints: { 1: 0 } },
    { name: "Павел Муратов", position: "НАП", club: "Мелитополь", points: 0, price: 6, tourPoints: { 1: 0 } },
    { name: "Роман Кравцов", position: "НАП", club: "Мелитополь", points: 0, price: 6, tourPoints: { 1: 0 } },
+  // гладиатор
+  { name: "Швед", position: "ВР", club: "Гладиатор", points: 0, price: 3, tourPoints: { 1: 0 } },
+  { name: "Алекс Селихов", position: "ВР", club: "Гладиатор", points: 0, price: 3, tourPoints: { 1: 0 } },
+  { name: "Накатика Явъебука", position: "ЗЩ", club: "Гладиатор", points: 0, price: 4, tourPoints: { 1: 0 } },
+  { name: "Евгений Джикия", position: "ЗЩ", club: "Гладиатор", points: 0, price: 4, tourPoints: { 1: 0, 2: 0 } },
+  { name: "Антон Чернов", position: "ЗЩ", club: "Гладиатор", points: 0, price: 4, tourPoints: { 1: 0 } },
+  { name: "Иван Резок", position: "ПЗ", club: "Гладиатор", points: 0, price: 5, tourPoints: { 1: 0 } },
+  { name: "Марти Перейра", position: "ПЗ", club: "Гладиатор", points: 0, price: 5, tourPoints: { 1: 0 } },
+  { name: "Дмитрий Игнатов", position: "ПЗ", club: "Гладиатор", points: 0, price: 5, tourPoints: { 1: 0 } },
+  { name: "Данила Пруцев", position: "ПЗ", club: "Гладиатор", points: 0, price: 5, tourPoints: { 1: 0 } },
+  { name: "Алекс Густаво", position: "ПЗ", club: "Гладиатор", points: 0, price: 5, tourPoints: { 1: 0 } },
+  { name: "Леви Жуан-Кристофи", position: "ПЗ", club: "Гладиатор", points: 0, price: 5, tourPoints: { 1: 0 } },
+  { name: "Муми Альварез", position: "НАП", club: "Гладиатор", points: 0, price: 6, tourPoints: { 1: 0 } },
+  { name: "Антуан Зиньковски", position: "НАП", club: "Гладиатор", points: 0, price: 6, tourPoints: { 1: 0 } },
+  { name: "Гонсало Де Са", position: "НАП", club: "Гладиатор", points: 0, price: 6, tourPoints: { 1: 0 } },
+  { name: "Эгаш Промес", position: "НАП", club: "Гладиатор", points: 0, price: 6, tourPoints: { 1: 0 } },
+  { name: "Энни Угальде", position: "НАП", club: "Гладиатор", points: 0, price: 6, tourPoints: { 1: 0 } },
+  // джумейра
+  { name: "Гарри Гюльтер", position: "ВР", club: "Джумейра", points: 0, price: 3, tourPoints: { 1: 0 } },
+  { name: "Робель Шамрело", position: "ЗЩ", club: "Джумейра", points: 0, price: 4, tourPoints: { 1: 0 } },
+  { name: "Антонио Вивальди", position: "ЗЩ", club: "Джумейра", points: 0, price: 4, tourPoints: { 1: 0, 2: 0 } },
+  { name: "Фердан Берин", position: "ЗЩ", club: "Джумейра", points: 0, price: 4, tourPoints: { 1: 0 } },
+  { name: "Роннель Карб", position: "ЗЩ", club: "Джумейра", points: 0, price: 4, tourPoints: { 1: 0 } },
+  { name: "Алехандро Уокер", position: "ПЗ", club: "Джумейра", points: 0, price: 5, tourPoints: { 1: 0 } },
+  { name: "Кристоф Метцелдер", position: "ПЗ", club: "Джумейра", points: 0, price: 5, tourPoints: { 1: 0 } },
+  { name: "Филипп Боувен", position: "ПЗ", club: "Джумейра", points: 0, price: 5, tourPoints: { 1: 0 } },
+  { name: "Ашраф Зарен", position: "ПЗ", club: "Джумейра", points: 0, price: 5, tourPoints: { 1: 0 } },
+  { name: "Абдумал Аль-Фараби", position: "НАП", club: "Джумейра", points: 0, price: 6, tourPoints: { 1: 0 } },
+  { name: "Ларс Олсен", position: "НАП", club: "Джумейра", points: 0, price: 6, tourPoints: { 1: 0 } },
+  { name: "Алекс Шик", position: "НАП", club: "Джумейра", points: 0, price: 6, tourPoints: { 1: 0 } },
+  { name: "Антуан Лефевр", position: "НАП", club: "Джумейра", points: 0, price: 6, tourPoints: { 1: 0 } },
+
 
     
 
@@ -975,8 +1007,8 @@ document.addEventListener("DOMContentLoaded", function() {
         if (filters) {
             filters.style.position = 'sticky';
             filters.style.top = '0';
-            filters.style.background = 'rgba(0,0,0,0.8)';
-            filters.style.zIndex = '100'; // Убедимся, что фильтры ниже таблицы лидеров
+            filters.style.background = 'rgba(0,0,0,0.9)';
+            filters.style.zIndex = '100';
             filters.style.padding = '10px 0';
         }
 
