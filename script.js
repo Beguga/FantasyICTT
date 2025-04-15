@@ -9,13 +9,23 @@ function toggleInfo(contentId) {
 
 // Данные о турах
 const tours = [
-    { id: 1, status: "completed", deadline: "2025-04-10T23:59:00" },
-    { id: 2, status: "completed", deadline: "2025-04-24T23:59:00" },
-    { id: 3, status: "completed", deadline: "2025-04-30T23:59:00" },
-    { id: 4, status: "active", deadline: "2025-05-07T23:59:00" },
+    { id: 1, status: "active", deadline: "2025-04-16T23:59:00" },
+    { id: 2, status: "upcoming", deadline: "2025-04-24T23:59:00" },
+    { id: 3, status: "upcoming", deadline: "2025-04-30T23:59:00" },
+    { id: 4, status: "upcoming", deadline: "2025-05-07T23:59:00" },
     { id: 5, status: "upcoming", deadline: "2025-05-14T23:59:00" },
     { id: 6, status: "upcoming", deadline: "2025-05-21T23:59:00" },
-    { id: 7, status: "upcoming", deadline: "2025-06-21T23:59:00" },
+    { id: 7, status: "upcoming", deadline: "2025-05-21T23:59:00" },
+    { id: 8, status: "upcoming", deadline: "2025-05-21T23:59:00" },
+    { id: 9, status: "upcoming", deadline: "2025-05-21T23:59:00" },
+    { id: 10, status: "upcoming", deadline: "2025-05-21T23:59:00" },
+    { id: 11, status: "upcoming", deadline: "2025-05-21T23:59:00" },
+    { id: 12, status: "upcoming", deadline: "2025-05-21T23:59:00" },
+    { id: 13, status: "upcoming", deadline: "2025-05-21T23:59:00" },
+    { id: 14, status: "upcoming", deadline: "2025-05-21T23:59:00" },
+    { id: 15, status: "upcoming", deadline: "2025-05-21T23:59:00" },
+    { id: 16, status: "upcoming", deadline: "2025-05-21T23:59:00" },
+    { id: 17, status: "upcoming", deadline: "2025-05-21T23:59:00" },
 ];
 
 // Данные об игроках
