@@ -27,6 +27,41 @@ body.fantasy-page {
     background-size: cover;
 }
 
+/* Фон для страницы Team Selection */
+body.team-selection-page {
+    background: url('images/background-team-selection.png') no-repeat center center;
+    background-size: cover;
+}
+
+/* Контейнер для главной страницы (index.html) */
+.container {
+    position: relative;
+    min-height: 100vh;
+    text-align: center;
+}
+
+.logo {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 350px;
+}
+
+.buttons {
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.menu-button {
+    width: 200px;
+}
+
 /* Контейнер для страницы Fantasy */
 .fantasy-container {
     padding: 40px;
@@ -35,14 +70,8 @@ body.fantasy-page {
     box-sizing: border-box;
     position: absolute;
     top: 10%;
-    left: 20%; /* Восстановили исходное значение для ПК */
+    left: 20%;
     transform: translateX(-50%);
-}
-
-.fantasy-container h2 {
-    font-size: 2em;
-    text-transform: uppercase;
-    margin-bottom: 20px;
 }
 
 /* Стили для формы */
@@ -50,47 +79,44 @@ body.fantasy-page {
     display: flex;
     flex-direction: column;
     gap: 15px;
-    width: 450px; /* Восстановили исходное значение для ПК */
+    width: 450px;
 }
 
 #user-form label {
     font-size: 1.2em;
-    text-align: left;
 }
 
 #user-form input,
 #user-form select {
     padding: 10px;
     font-size: 1em;
-    border: 2px solid white;
     background: rgba(255, 255, 255, 0.1);
+    border: none;
+    border-radius: 5px;
     color: white;
-    font-family: 'Neue Machina', sans-serif;
-    font-weight: 700;
 }
 
 #user-form select {
-    appearance: none;
-    background: rgba(255, 255, 255, 0.1) url('images/arrow-down.png') no-repeat right 10px center;
+    background: url('images/arrow-down.png') no-repeat right center;
     background-size: 20px;
-    color: white; /* Исправили цвет текста на белый */
+    appearance: none;
+    padding-right: 30px;
 }
 
-/* Кнопка "Далее" как спрайт */
 .next-button {
-    width: 300px; /* Восстановили исходное значение для ПК */
-    height: 90px;
-    background: url('images/button-sprite.png') no-repeat 0 0;
-    background-size: 225px 45px;
+    width: 250px;
+    height: 80px;
+    background: url('images/next-button.png') no-repeat center center;
+    background-size: 200px 40px;
     border: none;
     cursor: pointer;
-    text-indent: -9999px;
+    margin: 0 auto;
 }
 
-/* Стили для страницы Info */
+/* Контейнер для страницы Info */
 .info-container {
     padding: 80px 40px 40px 40px;
-    color: white;
+    text-align: center;
     min-height: 100vh;
     box-sizing: border-box;
 }
@@ -105,23 +131,17 @@ body.fantasy-page {
     width: 40px;
 }
 
-.info-block {
-    margin-bottom: 20px;
-}
-
 .info-header {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
+    gap: 10px;
     cursor: pointer;
-    border-bottom: 2px solid white;
-    padding-bottom: 10px;
 }
 
 .info-header h2 {
-    margin: 0;
     font-size: 2em;
-    text-transform: uppercase;
+    margin: 20px 0;
 }
 
 .arrow {
@@ -135,9 +155,10 @@ body.fantasy-page {
 
 .info-content {
     display: none;
-    padding: 20px 0;
-    font-size: 1.1em;
-    line-height: 1.5;
+    font-size: 1em;
+    text-align: left;
+    max-width: 800px;
+    margin: 0 auto;
 }
 
 .info-content.active {
@@ -145,148 +166,141 @@ body.fantasy-page {
 }
 
 .info-content h3.highlight {
+    color: #4CAF50;
     font-size: 1.5em;
-    text-transform: uppercase;
 }
 
-.info-content p {
-    margin: 10px 0;
-}
-
-.info-content ul {
-    margin: 10px 0;
-    padding-left: 20px;
-}
-
-.info-content li {
-    margin-bottom: 5px;
-}
-
-/* Стили для главной страницы */
-.container {
-    text-align: center;
-}
-
-.logo {
-    width: 400px;
-    position: absolute;
-    top: 20%;
-    left: 50%;
-    transform: translateX(-50%);
-}
-
-.buttons {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translateX(-50%);
-}
-
-.menu-button {
-    width: 200px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-a {
-    text-decoration: none;
-}
-
-/* Фон для страницы Team Selection */
-body.team-selection-page {
-    background: url('images/background-team-selection.png') no-repeat center center;
-    background-size: cover;
-}
-
-/* Контейнер для страницы */
+/* Контейнер для страницы Team Selection */
 .team-selection-container {
     padding: 40px;
+    text-align: center;
     min-height: 100vh;
     box-sizing: border-box;
-    color: white;
 }
 
 .team-selection-container h2 {
     font-size: 2em;
-    text-transform: uppercase;
     margin-bottom: 20px;
 }
 
-/* Основной контент: поле и список игроков */
-.team-selection-content {
-    display: flex; /* Восстановили исходное значение для ПК */
-    gap: 20px;
+#leaderboard-button {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-family: 'Neue Machina', sans-serif;
+    font-weight: 700;
 }
 
-/* Поле */
+.team-selection-content {
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+    margin: 40px 0;
+}
+
 .field {
     flex: 1;
+    height: 600px;
     background: url('images/field.png') no-repeat center center;
-    background-size: contain;
-    height: 500px; /* Восстановили исходное значение для ПК */
+    background-size: cover;
     position: relative;
 }
 
-/* Секции для игроков */
 .goalkeepers, .defenders, .midfielders, .forwards {
-    display: flex;
-    justify-content: space-around;
     position: absolute;
     width: 100%;
+    display: flex;
+    justify-content: space-around;
 }
 
-.goalkeepers { top: 10%; }
-.defenders { top: 30%; }
-.midfielders { top: 50%; }
-.forwards { top: 70%; }
+.goalkeepers {
+    top: 10%;
+}
 
-/* Ячейки для игроков */
+.defenders {
+    top: 30%;
+}
+
+.midfielders {
+    top: 50%;
+}
+
+.forwards {
+    top: 70%;
+}
+
 .player-slot {
-    width: 60px; /* Восстановили исходное значение для ПК */
+    width: 60px;
     height: 60px;
-    background: rgba(255, 255, 255, 0.2);
-    border: 2px solid white;
+    border: 3px solid white;
     border-radius: 50%;
     display: flex;
-    align-items: center;
     justify-content: center;
-    font-size: 0.8em; /* Восстановили исходное значение для ПК */
+    align-items: center;
+    font-size: 0.8em;
     text-align: center;
     cursor: pointer;
     position: relative;
+    background: rgba(255, 255, 255, 0.2);
 }
 
 .player-slot.filled {
-    background: rgba(0, 255, 0, 0.2);
+    background: rgba(0, 255, 0, 0.5);
 }
 
-/* Кнопка удаления игрока */
 .remove-player {
     position: absolute;
     top: -10px;
     right: -10px;
-    width: 20px; /* Восстановили исходное значение для ПК */
+    width: 20px;
     height: 20px;
     background: red;
     color: white;
     border: none;
     border-radius: 50%;
     cursor: pointer;
-    font-size: 0.8em; /* Восстановили исходное значение для ПК */
+    font-size: 0.8em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-/* Список игроков */
+.tour-selection {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.tour-button {
+    padding: 10px 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-family: 'Neue Machina', sans-serif;
+    font-weight: 700;
+}
+
+.tour-button.active {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.tour-button.completed {
+    background: rgba(0, 255, 0, 0.5);
+}
+
 .player-list {
     flex: 1;
-    background: rgba(0, 0, 0, 0.8);
-    padding: 20px;
-    border-radius: 10px;
-    max-height: 600px; /* Восстановили исходное значение для ПК */
+    max-height: 600px;
     overflow-y: auto;
-    z-index: 1; /* Установили z-index ниже, чем у таблицы лидеров */
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.8);
 }
 
 .filters {
@@ -296,66 +310,39 @@ body.team-selection-page {
 }
 
 .filters select {
-    padding: 5px;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: white;
     font-family: 'Neue Machina', sans-serif;
     font-weight: 700;
-    background: rgba(255, 255, 255, 0.1);
-    border: 2px solid white;
 }
 
-.filters select option {
-    color: black;
-}
-
-/* Заголовок столбцов */
-.player-header {
+.player-header, .player {
     display: grid;
     grid-template-columns: 2fr 1fr 2fr 1fr 1fr 1fr;
     gap: 10px;
     padding: 10px;
-    background: rgba(255, 255, 255, 0.2);
-    border-radius: 5px;
-    font-weight: bold;
-    text-align: center;
-    color: white;
-}
-
-.players {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.player {
-    display: grid;
-    grid-template-columns: 2fr 1fr 2fr 1fr 1fr 1fr;
-    gap: 10px;
-    padding: 10px;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 5px;
-    cursor: pointer;
-    text-align: center;
-    align-items: center;
-    color: white;
-}
-
-.player:hover {
-    background: rgba(255, 255, 255, 0.2);
-}
-
-.player span {
     font-size: 1em;
 }
 
-/* Кнопка добавления игрока */
+.player-header {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.player {
+    background: rgba(255, 255, 255, 0.1);
+}
+
 .add-player {
+    width: 30px;
+    height: 30px;
     background: green;
     color: white;
     border: none;
     border-radius: 50%;
-    width: 20px;
-    height: 20px;
     cursor: pointer;
+    font-size: 1.2em;
 }
 
 .add-player:disabled {
@@ -363,7 +350,6 @@ body.team-selection-page {
     cursor: not-allowed;
 }
 
-/* Пагинация */
 .pagination {
     display: flex;
     justify-content: center;
@@ -372,11 +358,10 @@ body.team-selection-page {
 }
 
 .pagination button {
-    padding: 5px 10px;
+    padding: 10px 20px;
     background: rgba(255, 255, 255, 0.1);
+    border: none;
     color: white;
-    border: 2px solid white;
-    border-radius: 5px;
     cursor: pointer;
     font-family: 'Neue Machina', sans-serif;
     font-weight: 700;
@@ -387,160 +372,75 @@ body.team-selection-page {
     cursor: not-allowed;
 }
 
-/* Бюджет и кнопка "Сохранить" */
 .budget {
-    margin-top: 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-top: 20px;
+}
+
+.budget span {
+    font-size: 1.2em;
 }
 
 .save-button {
-    width: 300px; /* Восстановили исходное значение для ПК */
-    height: 90px;
+    width: 250px;
+    height: 80px;
     background: url('images/save-button.png') no-repeat center center;
-    background-size: 225px 45px;
+    background-size: 200px 40px;
     border: none;
     cursor: pointer;
-    text-indent: -9999px;
 }
 
-/* Очки за тур */
-.tour-points {
-    margin-top: 20px;
-    font-size: 1.2em;
-}
-
-/* Доступные замены */
-.transfers {
-    font-size: 1.2em;
-}
-
-/* Стили для панели туров */
-.tour-selection {
-    margin-bottom: 20px;
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-}
-
-.tour-button {
-    padding: 10px 20px;
-    background: rgba(255, 255, 255, 0.1);
-    color: white;
-    border: 2px solid white;
-    border-radius: 5px;
-    cursor: pointer;
-    font-family: 'Neue Machina', sans-serif;
-    font-weight: 700;
-    transition: background 0.3s ease;
-}
-
-.tour-button.active {
-    background: rgba(0, 255, 0, 0.3);
-}
-
-.tour-button.completed {
-    background: rgba(255, 0, 0, 0.3);
-}
-
-.tour-button:hover:not(.active):not(.completed) {
-    background: rgba(255, 255, 255, 0.2);
-}
-
-#leaderboard-button {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    padding: 10px 20px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    z-index: 1001; /* Выше всех элементов */
-}
-
-#leaderboard-button:hover {
-    background-color: #45a049;
-}
-
+/* Таблица лидеров */
 .modal {
     display: none;
     position: fixed;
-    z-index: 1000; /* Высокий z-index, чтобы быть выше всех */
-    left: 0;
     top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0,0,0,0.4);
+    background: rgba(0, 0, 0, 0.5);
 }
 
 .modal-content {
-    background-color: #fefefe;
-    margin: 5% auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.8);
     padding: 20px;
-    border: 1px solid #888;
     width: 80%;
-    max-width: 600px;
-    border-radius: 10px;
-    color: white; /* Текст белый */
-}
-
-.modal-content h2 {
-    color: white; /* Текст белый */
-    margin-bottom: 20px;
-}
-
-.modal-content h3 {
-    color: white; /* Текст белый */
+    max-width: 800px;
+    color: white;
 }
 
 .close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
-    color: white; /* Текст белый при наведении */
-    text-decoration: none;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 2em;
     cursor: pointer;
 }
 
-#leaderboard-content {
-    margin-top: 20px;
-}
-
-#leaderboard-content h3 {
-    color: white; /* Текст белый */
-    margin-bottom: 10px;
-}
-
-table {
+#leaderboard-table {
     width: 100%;
     border-collapse: collapse;
-    margin-bottom: 20px;
+    margin-top: 20px;
 }
 
 th, td {
     padding: 10px;
     text-align: left;
-    border-bottom: 1px solid #ddd;
-    color: white; /* Текст белый */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 th {
-    background-color: #4CAF50; /* Изменили фон заголовков таблицы */
-    color: white; /* Текст белый */
+    background: #4CAF50;
 }
 
 td {
-    background-color: #333; /* Серый фон для ячеек */
-    color: white; /* Текст белый */
+    background: rgba(255, 255, 255, 0.05);
 }
 
 /* Медиа-запросы для мобильных устройств (ширина экрана до 768px) */
@@ -569,9 +469,9 @@ td {
     .fantasy-container {
         padding: 20px;
         top: 5%;
-        left: 50%; /* Центрируем на мобильных */
+        left: 50%;
         transform: translateX(-50%);
-        width: 100%; /* Занимает всю ширину */
+        width: 100%;
     }
 
     .fantasy-container h2 {
@@ -583,7 +483,7 @@ td {
         width: 100%;
         max-width: 320px;
         gap: 10px;
-        margin: 0 auto; /* Центрируем форму */
+        margin: 0 auto;
     }
 
     #user-form label {
@@ -607,32 +507,6 @@ td {
         background-size: 150px 30px;
     }
 
-    /* Страница Info (info.html) */
-    .assis-container {
-        padding: 60px 20px 20px 20px;
-    }
-
-    .back-arrow {
-        width: 30px;
-    }
-
-    .info-header h2 {
-        font-size: 1.5em;
-    }
-
-    .arrow {
-        width: 25px;
-    }
-
-    .info-content {
-        font-size: 0.9em;
-        padding: 15px 0;
-    }
-
-    .info-content h3.highlight {
-        font-size: 1.2em;
-    }
-
     /* Страница Team Selection (team-selection.html) */
     .team-selection-container {
         padding: 20px;
@@ -649,12 +523,14 @@ td {
         width: 100%;
         padding: 10px;
         font-size: 1em;
+        background-color: #4CAF50;
+        color: white;
     }
 
     /* Поле с составом */
     .team-selection-content {
         flex-direction: column;
-        gap: 15px;
+        gap: 20px;
     }
 
     .field {
@@ -662,24 +538,25 @@ td {
         background-size: contain;
         width: 100%;
         max-width: 400px;
-        margin: 0 auto; /* Центрируем поле */
+        margin: 0 auto;
     }
 
     .goalkeepers, .defenders, .midfielders, .forwards {
-        justify-content: space-around;
-        gap: 10px; /* Увеличили gap для разделения кругов */
-        padding: 0 5px;
+        justify-content: space-evenly;
     }
 
     .goalkeepers {
         top: 5%;
     }
+
     .defenders {
         top: 25%;
     }
+
     .midfielders {
         top: 50%;
     }
+
     .forwards {
         top: 75%;
     }
@@ -688,15 +565,15 @@ td {
         width: 40px;
         height: 40px;
         font-size: 0.6em;
-        margin: 0 5px;
+        border-width: 2px;
     }
 
     .remove-player {
-        width: 16px;
-        height: 16px;
+        width: 15px;
+        height: 15px;
         font-size: 0.6em;
-        top: -6px;
-        right: -6px;
+        top: -5px;
+        right: -5px;
     }
 
     /* Панель туров */
@@ -716,7 +593,6 @@ td {
         max-height: 400px;
         width: 100%;
         box-sizing: border-box;
-        z-index: 1; /* Убедимся, что список ниже таблицы лидеров */
     }
 
     .filters {
@@ -740,7 +616,6 @@ td {
         gap: 5px;
         padding: 8px;
         font-size: 0.8em;
-        color: white;
     }
 
     .player {
@@ -748,7 +623,6 @@ td {
         gap: 5px;
         padding: 8px;
         font-size: 0.8em;
-        color: white;
     }
 
     .add-player {
@@ -795,7 +669,7 @@ td {
 
     /* Таблица лидеров */
     .modal {
-        z-index: 1000; /* Убедимся, что таблица лидеров выше всех */
+        z-index: 1000;
     }
 
     .modal-content {
@@ -814,6 +688,45 @@ td {
     th, td {
         padding: 8px;
         font-size: 0.9em;
-        color: white; /* Текст белый */
+    }
+
+    /* Страница Info (info.html) */
+    .info-container {
+        padding: 60px 20px 20px 20px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .back-button {
+        top: 15px;
+        left: 15px;
+    }
+
+    .back-arrow {
+        width: 30px;
+    }
+
+    .info-header {
+        gap: 8px;
+    }
+
+    .info-header h2 {
+        font-size: 1.5em;
+        margin: 15px 0;
+    }
+
+    .arrow {
+        width: 25px;
+    }
+
+    .info-content {
+        font-size: 0.9em;
+        padding: 15px 0;
+        max-width: 100%;
+        margin: 0 10px;
+    }
+
+    .info-content h3.highlight {
+        font-size: 1.2em;
     }
 }

@@ -261,33 +261,67 @@ const playersData = [
     { name: "Лигар Берджи", position: "НАП", club: "Флорида", points: 0, price: 5, tourPoints: { 1: 0 } },
     { name: "Рео Гонсалез", position: "НАП", club: "Флорида", points: 0, price: 5, tourPoints: { 1: 0 } },
     { name: "Хуан Мусси", position: "НАП", club: "Флорида", points: 0, price: 5, tourPoints: { 1: 0 } },
+    // Колчестер
+    { name: "Амир Аль-Махди", position: "ЗЩ", club: "Колчестер", points: 0, price: 3, tourPoints: { 1: 0 } },
+    { name: "Асаанте Уилльямс", position: "ПЗ", club: "Колчестер", points: 0, price: 4, tourPoints: { 1: 0 } },
+    { name: "Дерик Уайт", position: "ПЗ", club: "Колчестер", points: 0, price: 4, tourPoints: { 1: 0 } },
+    { name: "Джеймс Наш", position: "ПЗ", club: "Колчестер", points: 0, price: 4, tourPoints: { 1: 0 } },
+    { name: "Джонатан Рейс", position: "ПЗ", club: "Колчестер", points: 0, price: 4, tourPoints: { 1: 0 } },
+    { name: "Густав Уилльямс", position: "НАП", club: "Колчестер", points: 0, price: 5, tourPoints: { 1: 0 } },
+    // Флорида
+    { name: "Алехандро Берджи", position: "ВР", club: "Флорида", points: 0, price: 2, tourPoints: { 1: 0 } },
+    { name: "Флорентино Талко", position: "ВР", club: "Флорида", points: 0, price: 2, tourPoints: { 1: 0 } },
+    { name: "Алехандру Матаб", position: "ЗЩ", club: "Флорида", points: 0, price: 3, tourPoints: { 1: 0 } },
+    { name: "Кристен Свифткей", position: "ЗЩ", club: "Флорида", points: 0, price: 3, tourPoints: { 1: 0 } },
+    { name: "Мудак Пидор", position: "ЗЩ", club: "Флорида", points: 0, price: 3, tourPoints: { 1: 0 } },
+    { name: "Фит Флоу", position: "ЗЩ", club: "Флорида", points: 0, price: 3, tourPoints: { 1: 0 } },
+    { name: "Адам Рудони", position: "ПЗ", club: "Флорида", points: 0, price: 4, tourPoints: { 1: 0 } },
+    { name: "Лиам Майк", position: "ПЗ", club: "Флорида", points: 0, price: 4, tourPoints: { 1: 0 } },
+    { name: "Станишич Геронимо", position: "ПЗ", club: "Флорида", points: 0, price: 4, tourPoints: { 1: 0 } },
+    { name: "Франко Карбонч", position: "ПЗ", club: "Флорида", points: 0, price: 4, tourPoints: { 1: 0 } },
+    { name: "Алехандро Мефедрини", position: "НАП", club: "Флорида", points: 0, price: 5, tourPoints: { 1: 0 } },
+    { name: "Лигар Берджи", position: "НАП", club: "Флорида", points: 0, price: 5, tourPoints: { 1: 0 } },
+    { name: "Рео Гонсалез", position: "НАП", club: "Флорида", points: 0, price: 5, tourPoints: { 1: 0 } },
+    { name: "Хуан Мусси", position: "НАП", club: "Флорида", points: 0, price: 5, tourPoints: { 1: 0 } },
+    // металлург
+    { name: "Алексей Скорблюк", position: "ВР", club: "Металлург", points: 0, price: 2, tourPoints: { 1: 0 } },
+    { name: "Васильев Егор", position: "ВР", club: "Металлург", points: 0, price: 2, tourPoints: { 1: 0 } },
+    { name: "Скорин Александр", position: "ЗЩ", club: "Металлург", points: 0, price: 3, tourPoints: { 1: 0 } },
+    { name: "Кевин Шнайдер", position: "ЗЩ", club: "Металлург", points: 0, price: 3, tourPoints: { 1: 0 } },
+    { name: "Хосе Гарсия", position: "ЗЩ", club: "Металлург", points: 0, price: 3, tourPoints: { 1: 0 } },
+    { name: "Михаил Гречкин", position: "ЗЩ", club: "Металлург", points: 0, price: 3, tourPoints: { 1: 0 } },
+    { name: "Педро Слоч", position: "ЗЩ", club: "Металлург", points: 0, price: 3, tourPoints: { 1: 0 } },
+    { name: "Реллази Мартин", position: "ПЗ", club: "Металлург", points: 0, price: 4, tourPoints: { 1: 0 } },
+    { name: "Давид Мхитарян", position: "ПЗ", club: "Металлург", points: 0, price: 4, tourPoints: { 1: 0 } },
+    { name: "Теплу", position: "ПЗ", club: "Металлург", points: 0, price: 4, tourPoints: { 1: 0 } },
+    { name: "Павел Танков", position: "ПЗ", club: "Металлург", points: 0, price: 4, tourPoints: { 1: 0 } },
+    { name: "Адам Хахатунов", position: "НАП", club: "Металлург", points: 0, price: 5, tourPoints: { 1: 0 } },
+    { name: "Марков Степан", position: "НАП", club: "Металлург", points: 0, price: 5, tourPoints: { 1: 0 } },
+    { name: "Давид Зеларян", position: "НАП", club: "Металлург", points: 0, price: 5, tourPoints: { 1: 0 } },
+    { name: "Депхиа Чхеидзе", position: "НАП", club: "Металлург", points: 0, price: 5, tourPoints: { 1: 0 } },
+    // фьрод
+
+    { name: "Адольф Узбеков", position: "ВР", club: "Фьорд", points: 0, price: 2, tourPoints: { 1: 0 } },
+    { name: "Джон Сбане", position: "ВР", club: "Фьорд", points: 0, price: 2, tourPoints: { 1: 0 } },
+    { name: "Эрик Хансен", position: "ВР", club: "Фьорд", points: 0, price: 2, tourPoints: { 1: 0 } },
+    { name: "Алехандро Мартинелли", position: "ЗЩ", club: "Фьорд", points: 0, price: 3, tourPoints: { 1: 0 } },
+    { name: "Андрей Андреев", position: "ЗЩ", club: "Фьорд", points: 0, price: 3, tourPoints: { 1: 0 } },
+    { name: "Андрей Солсов", position: "ЗЩ", club: "Фьорд", points: 0, price: 3, tourPoints: { 1: 0 } },
+    { name: "Сей Норманич", position: "ЗЩ", club: "Фьорд", points: 0, price: 3, tourPoints: { 1: 0 } },
+    { name: "Ашот Арутюрян", position: "ПЗ", club: "Фьорд", points: 0, price: 4, tourPoints: { 1: 0 } },
+    { name: "Гленн Бейл", position: "ПЗ", club: "Фьорд", points: 0, price: 4, tourPoints: { 1: 0 } },
+    { name: "Маркс Карл", position: "ПЗ", club: "МФьорд", points: 0, price: 4, tourPoints: { 1: 0 } },
+    { name: "Милош Альванте", position: "НАП", club: "Фьорд", points: 0, price: 5, tourPoints: { 1: 0 } },
+    { name: "Дебир Этобо", position: "НАП", club: "Фьорд", points: 0, price: 5, tourPoints: { 1: 0 } },
+    { name: "Роман Ебатырев", position: "НАП", club: "Фьорд", points: 0, price: 5, tourPoints: { 1: 0 } },
+    { name: "Жерар Дюкло", position: "НАП", club: "Фьорд", points: 0, price: 5, tourPoints: { 1: 0 } },
+
 
 
 
 
     
 
-
-
-    { name: "Тимирбай Мансур", position: "НАП", club: "Атлетико Горизонт", points: 0, price: 8, tourPoints: { 1: 0 } },
-    { name: "Ферсман Торрес", position: "НАП", club: "Атлетико Горизонт", points: 0, price: 8, tourPoints: { 1: 0 } },
-    { name: "Анжело Герд", position: "ВР", club: "Сайрос", points: 0, price: 5, tourPoints: { 1: 1 } },
-    { name: "Рагнар", position: "ЗЩ", club: "Манреса", points: 40, price: 1, tourPoints: { 1: 3 } },
-    { name: "Нуну Мендеш", position: "ЗЩ", club: "Ритховен", points: 37, price: 1, tourPoints: { 1: 2 } },
-    { name: "Усман Дембеле", position: "ПЗ", club: "Уралан", points: 34, price: 8, tourPoints: { 1: 4 } },
-    { name: "Харри Кейн", position: "НАП", club: "Мелитополь", points: 32, price: 9, tourPoints: { 1: 7 } },
-    { name: "Харри ввКейн", position: "НАП", club: "Кобресаль", points: 32, price: 1, tourPoints: { 1: 1 } },
-    { name: "Килиан Мбаппе", position: "НАП", club: "Тюмень", points: 30, price: 1, tourPoints: { 1: 5 } },
-    { name: "Килвыфывиан Мбаппе", position: "ПЗ", club: "Атлетико Хоризонте", points: 30, price: 1, tourPoints: { 1: 2 } },
-    { name: "Кивыфлиан Мбаппе", position: "ПЗ", club: "Гладиатор", points: 30, price: 1, tourPoints: { 1: 3 } },
-    { name: "Альвавыаваыро Хахим", position: "ЗЩ", club: "Флорида", points: 28, price: 1, tourPoints: { 1: 1 } },
-    { name: "Альваавыавро Хахим", position: "ЗЩ", club: "Металлург", points: 28, price: 15, tourPoints: { 1: 2 } },
-    { name: "Альваро Хахим", position: "ЗЩ", club: "Лас Фьеро", points: 28, price: 1, tourPoints: { 1: 0 } },
-    { name: "Витинья", position: "ПЗ", club: "Капро", points: 28, price: 1, tourPoints: { 1: 3 } },
-    { name: "Хвича Кварацхелия", position: "ПЗ", club: "Фьорд", points: 26, price: 1, tourPoints: { 1: 2 } },
-    { name: "Картошка", position: "ВР", club: "Джумейра", points: 26, price: 1, tourPoints: { 1: 4 } },
-    { name: "Картоавашка", position: "ПЗ", club: "РБ Братислава", points: 26, price: 1, tourPoints: { 1: 1 } },
-    { name: "Картоввшка", position: "ПЗ", club: "РБ Тотем", points: 26, price: 1, tourPoints: { 1: 0 } },
 ];
 
 // Инициализация Firebase
