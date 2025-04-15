@@ -278,70 +278,48 @@ function getLastCompletedTour() {
 
 // Функция для отображения таблицы лидеров (с использованием Firebase)
 async function displayLeaderboard() {
-    const overallTableBody = document.querySelector("#overall-leaderboard tbody");
-    const lastTourTableBody = document.querySelector("#last-tour-leaderboard tbody");
+    const leaderboardTableBody = document.querySelector("#leaderboard-table tbody");
 
-    overallTableBody.innerHTML = "<tr><td colspan='3'>Загрузка...</td></tr>";
-    lastTourTableBody.innerHTML = "<tr><td colspan='3'>Загрузка...</td></tr>";
+    if (!leaderboardTableBody) {
+        console.warn("Элемент таблицы лидеров не найден");
+        return;
+    }
+
+    leaderboardTableBody.innerHTML = "<tr><td colspan='4'>Загрузка...</td></tr>";
 
     try {
-        // Загружаем данные из Firebase
-        const snapshot = await database.ref("users").once("value");
-        const usersData = snapshot.val();
-        const allUsersFirebase = usersData ? Object.values(usersData) : [];
+        // Загружаем данные из Firebase по пути /leaderboard
+        const snapshot = await database.ref("leaderboard").once("value");
+        const leaderboardData = [];
+        snapshot.forEach(childSnapshot => {
+            const data = childSnapshot.val();
+            if (data && data.nickname && data.score !== undefined) {
+                leaderboardData.push(data);
+            }
+        });
 
-        // Фильтруем пользователей с валидными никами и данными
-        const validUsers = allUsersFirebase.filter(user => 
-            user.nickname && 
-            user.nickname.trim() !== "" && 
-            user.hasSavedTeam
-        );
+        // Сортируем по убыванию очков
+        leaderboardData.sort((a, b) => (b.score || 0) - (a.score || 0));
 
-        // Общий рейтинг
-        overallTableBody.innerHTML = "";
-        const overallSorted = [...validUsers].sort((a, b) => (b.totalPoints || 0) - (a.totalPoints || 0));
-        if (overallSorted.length === 0) {
-            overallTableBody.innerHTML = `<tr><td colspan="3">Нет данных</td></tr>`;
+        // Отображаем данные в таблице
+        leaderboardTableBody.innerHTML = "";
+        if (leaderboardData.length === 0) {
+            leaderboardTableBody.innerHTML = `<tr><td colspan="4">Нет данных</td></tr>`;
         } else {
-            overallSorted.forEach((user, index) => {
+            leaderboardData.slice(0, 10).forEach((entry, index) => {
                 const row = document.createElement("tr");
                 row.innerHTML = `
                     <td>${index + 1}</td>
-                    <td>${user.nickname}</td>
-                    <td>${user.totalPoints || 0}</td>
+                    <td>${entry.nickname}</td>
+                    <td>${entry.score}</td>
+                    <td>${entry.favoriteClub}</td>
                 `;
-                overallTableBody.appendChild(row);
+                leaderboardTableBody.appendChild(row);
             });
-        }
-
-        // Рейтинг за последний тур
-        lastTourTableBody.innerHTML = "";
-        const lastTour = getLastCompletedTour();
-        if (lastTour) {
-            const lastTourSorted = [...validUsers].sort((a, b) => 
-                (b.tourPoints?.[lastTour.id] || 0) - (a.tourPoints?.[lastTour.id] || 0)
-            );
-            if (lastTourSorted.length === 0) {
-                lastTourTableBody.innerHTML = `<tr><td colspan="3">Нет данных</td></tr>`;
-            } else {
-                lastTourSorted.forEach((user, index) => {
-                    const points = user.tourPoints?.[lastTour.id] || 0;
-                    const row = document.createElement("tr");
-                    row.innerHTML = `
-                        <td>${index + 1}</td>
-                        <td>${user.nickname}</td>
-                        <td>${points}</td>
-                    `;
-                    lastTourTableBody.appendChild(row);
-                });
-            }
-        } else {
-            lastTourTableBody.innerHTML = `<tr><td colspan="3">Нет завершённых туров</td></tr>`;
         }
     } catch (error) {
         console.error("Ошибка при загрузке данных для таблицы лидеров:", error);
-        overallTableBody.innerHTML = `<tr><td colspan="3">Ошибка загрузки данных</td></tr>`;
-        lastTourTableBody.innerHTML = `<tr><td colspan="3">Ошибка загрузки данных</td></tr>`;
+        leaderboardTableBody.innerHTML = `<tr><td colspan="4">Ошибка загрузки данных</td></tr>`;
     }
 }
 
@@ -380,82 +358,6 @@ async function saveUserData() {
     }
 }
 
-async function displayLeaderboard() {
-    const overallTableBody = document.querySelector("#overall-leaderboard tbody");
-    const lastTourTableBody = document.querySelector("#last-tour-leaderboard tbody");
-
-    if (!overallTableBody || !lastTourTableBody) {
-        console.warn("Элементы таблицы лидеров не найдены");
-        return;
-    }
-
-    overallTableBody.innerHTML = "<tr><td colspan='3'>Загрузка...</td></tr>";
-    lastTourTableBody.innerHTML = "<tr><td colspan='3'>Загрузка...</td></tr>";
-
-    try {
-        // Загружаем данные из Firebase
-        const snapshot = await database.ref("users").once("value");
-        const usersData = snapshot.val();
-        const allUsersFirebase = usersData ? Object.values(usersData) : [];
-
-        // Фильтруем пользователей с валидными никами и данными
-        const validUsers = allUsersFirebase.filter(user => 
-            user && 
-            user.nickname && 
-            user.nickname.trim() !== "" && 
-            user.hasSavedTeam && 
-            user.totalPoints !== undefined
-        );
-
-        // Общий рейтинг (топ-10)
-        overallTableBody.innerHTML = "";
-        const overallSorted = [...validUsers].sort((a, b) => (b.totalPoints || 0) - (a.totalPoints || 0));
-        if (overallSorted.length === 0) {
-            overallTableBody.innerHTML = `<tr><td colspan="3">Нет данных</td></tr>`;
-        } else {
-            overallSorted.slice(0, 10).forEach((user, index) => {
-                const row = document.createElement("tr");
-                row.innerHTML = `
-                    <td>${index + 1}</td>
-                    <td>${user.nickname}</td>
-                    <td>${user.totalPoints || 0}</td>
-                `;
-                overallTableBody.appendChild(row);
-            });
-        }
-
-        // Рейтинг за последний тур (топ-10)
-        lastTourTableBody.innerHTML = "";
-        const lastTour = getLastCompletedTour();
-        if (lastTour) {
-            const lastTourSorted = [...validUsers].sort((a, b) => 
-                (b.tourPoints?.[lastTour.id] || 0) - (a.tourPoints?.[lastTour.id] || 0)
-            );
-            if (lastTourSorted.length === 0) {
-                lastTourTableBody.innerHTML = `<tr><td colspan="3">Нет данных</td></tr>`;
-            } else {
-                lastTourSorted.slice(0, 10).forEach((user, index) => {
-                    const points = user.tourPoints?.[lastTour.id] || 0;
-                    const row = document.createElement("tr");
-                    row.innerHTML = `
-                        <td>${index + 1}</td>
-                        <td>${user.nickname}</td>
-                        <td>${points}</td>
-                    `;
-                    lastTourTableBody.appendChild(row);
-                });
-            }
-        } else {
-            lastTourTableBody.innerHTML = `<tr><td colspan="3">Нет завершённых туров</td></tr>`;
-        }
-    } catch (error) {
-        console.error("Ошибка при загрузке данных для таблицы лидеров:", error);
-        overallTableBody.innerHTML = `<tr><td colspan="3">Ошибка загрузки данных</td></tr>`;
-        lastTourTableBody.innerHTML = `<tr><td colspan="3">Ошибка загрузки данных</td></tr>`;
-    }
-}
-
-// Основная логика
 // Основная логика
 document.addEventListener("DOMContentLoaded", function() {
     // Проверка, запущен ли сайт через локальный сервер
