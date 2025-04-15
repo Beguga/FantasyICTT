@@ -112,7 +112,7 @@ const playersData = [
     { name: "Элеман Ле Мануель", position: "ВР", club: "Лас Фьеро", points: 0, price: 4, tourPoints: { 1: 0 } },
     { name: "Хорхе Санчез", position: "ЗЩ", club: "Лас Фьеро", points: 0, price: 5, tourPoints: { 1: 0 } },
     { name: "Ян Удасто", position: "ЗЩ", club: "Лас Фьеро", points: 0, price: 5, tourPoints: { 1: 0 } },
-    { name: "Игорь Селихов", position: "ЗЩ", club: "Лас Фьеро", points: 0, price: 5, tourPoints: { 1: 0 } },
+    { name: "Игорь Селяхов", position: "ЗЩ", club: "Лас Фьеро", points: 0, price: 5, tourPoints: { 1: 0 } },
     { name: "Янг Транни", position: "ЗЩ", club: "Лас Фьеро", points: 0, price: 5, tourPoints: { 1: 0 } },
     { name: "Пушнинуф Диффи", position: "ПЗ", club: "Лас Фьеро", points: 0, price: 6, tourPoints: { 1: 0 } },
     { name: "Райо Гайоли", position: "ПЗ", club: "Лас Фьеро", points: 0, price: 6, tourPoints: { 1: 0 } },
@@ -122,6 +122,77 @@ const playersData = [
     { name: "Артём Агаларов", position: "НАП", club: "Лас Фьеро", points: 0, price: 7, tourPoints: { 1: 0 } },
     { name: "Джастин Ханимбер", position: "НАП", club: "Лас Фьеро", points: 0, price: 7, tourPoints: { 1: 0 } },
     { name: "Иньяки Реми", position: "НАП", club: "Лас Фьеро", points: 0, price: 7, tourPoints: { 1: 0 } },
+
+    // Сайрос
+    { name: "Анжело Герд", position: "ВР", club: "Сайрос", points: 0, price: 4, tourPoints: { 1: 0 } },
+    { name: "Вилиам Кере", position: "ПЗ", club: "Сайрос", points: 0, price: 6, tourPoints: { 1: 0 } },
+    { name: "Пабло Гомез", position: "ПЗ", club: "Сайрос", points: 0, price: 6, tourPoints: { 1: 0 } },
+    { name: "Тео Бергкамп", position: "ПЗ", club: "Сайрос", points: 0, price: 6, tourPoints: { 1: 0 } },
+    { name: "Джеймс МакЛовер", position: "НАП", club: "Сайрос", points: 0, price: 7, tourPoints: { 1: 0 } },
+    { name: "Абрахам Фринг", position: "НАП", club: "Сайрос", points: 0, price: 7, tourPoints: { 1: 0 } },
+    { name: "Матео Солонео", position: "НАП", club: "Сайрос", points: 0, price: 7, tourPoints: { 1: 0 } },
+    { name: "Дэвид Недвед", position: "НАП", club: "Сайрос", points: 0, price: 7, tourPoints: { 1: 0 } },
+    // Манреса
+    { name: "Жоан Вила", position: "ВР", club: "Манреса", points: 0, price: 4, tourPoints: { 1: 0 } },
+    { name: "Ориол Серра", position: "ВР", club: "Манреса", points: 0, price: 4, tourPoints: { 1: 0 } },
+    { name: "Рамон Пужоль", position: "ЗЩ", club: "Манреса", points: 0, price: 5, tourPoints: { 1: 0 } },
+    { name: "Арнау Марти", position: "ЗЩ", club: "Манреса", points: 0, price: 5, tourPoints: { 1: 0 } },
+    { name: "Ферран Касальс", position: "ЗЩ", club: "Манреса", points: 0, price: 5, tourPoints: { 1: 0 } },
+    { name: "Марк Вентура", position: "ЗЩ", club: "Манреса", points: 0, price: 5, tourPoints: { 1: 0 } },
+    { name: "Пере Таррес", position: "ЗЩ", club: "Манреса", points: 0, price: 5, tourPoints: { 1: 0 } },
+    { name: "Жорди Ровира", position: "ПЗ", club: "Манреса", points: 0, price: 6, tourPoints: { 1: 0 } },
+    { name: "Нико Ривьера", position: "ПЗ", club: "Манреса", points: 0, price: 6, tourPoints: { 1: 0 } },
+    { name: "Джейми Торнтон", position: "ПЗ", club: "Манреса", points: 0, price: 6, tourPoints: { 1: 0 } },
+    { name: "Борха Рока", position: "ПЗ", club: "Манреса", points: 0, price: 6, tourPoints: { 1: 0 } },
+    { name: "Узи Фараджо", position: "ПЗ", club: "Манреса", points: 0, price: 6, tourPoints: { 1: 0 } },
+    { name: "Максим Ушаков", position: "НАП", club: "Манреса", points: 0, price: 7, tourPoints: { 1: 0 } },
+    { name: "Габриэль Пижае", position: "НАП", club: "Манреса", points: 0, price: 7, tourPoints: { 1: 0 } },
+    { name: "Томас Монсерро", position: "НАП", club: "Манреса", points: 0, price: 7, tourPoints: { 1: 0 } },
+    { name: "Маноло Доффо", position: "НАП", club: "Манреса", points: 0, price: 7, tourPoints: { 1: 0 } },
+    // Тотем
+    { name: "Джастин Ван Боммер", position: "ВР", club: "РБ Тотем", points: 0, price: 3, tourPoints: { 1: 0 } },
+    { name: "Томаш Нандрейх", position: "ВР", club: "РБ Тотем", points: 0, price: 3, tourPoints: { 1: 0 } },
+    { name: "Дрейт Каллин", position: "ЗЩ", club: "РБ Тотем", points: 0, price: 4, tourPoints: { 1: 0 } },
+    { name: "Кевин Гейлфроуд", position: "ЗЩ", club: "РБ Тотем", points: 0, price: 4, tourPoints: { 1: 0, 2: 0 } },
+    { name: "Эктор Баена", position: "ЗЩ", club: "РБ Тотем", points: 0, price: 4, tourPoints: { 1: 0 } },
+    { name: "Роналд Кампос", position: "ЗЩ", club: "РБ Тотем", points: 0, price: 4, tourPoints: { 1: 0 } },
+    { name: "Дэвид Дайер", position: "ЗЩ", club: "РБ Тотем", points: 0, price: 4, tourPoints: { 1: 0 } },
+    { name: "Юрген Шмид", position: "ЗЩ", club: "РБ Тотем", points: 0, price: 4, tourPoints: { 1: 0 } },
+    { name: "Джо Ронде", position: "ПЗ", club: "РБ Тотем", points: 0, price: 5, tourPoints: { 1: 0 } },
+    { name: "Кристиан Пиччи", position: "ПЗ", club: "РБ Тотем", points: 0, price: 5, tourPoints: { 1: 0 } },
+    { name: "Лука Брошич", position: "ПЗ", club: "РБ Тотем", points: 0, price: 5, tourPoints: { 1: 0 } },
+    { name: "Эрик Вильямс", position: "ПЗ", club: "РБ Тотем", points: 0, price: 5, tourPoints: { 1: 0 } },
+    { name: "Жан-Пьер", position: "ПЗ", club: "РБ Тотем", points: 0, price: 5, tourPoints: { 1: 0 } },
+    { name: "Тиджей Хайт", position: "ПЗ", club: "РБ Тотем", points: 0, price: 5, tourPoints: { 1: 0 } },
+    { name: "Марко Леоне", position: "ПЗ", club: "РБ Тотем", points: 0, price: 5, tourPoints: { 1: 0 } },
+    { name: "Рузиль Бекшиков", position: "ПЗ", club: "РБ Тотем", points: 0, price: 5, tourPoints: { 1: 0 } },
+    { name: "Леонардо Джоа", position: "НАП", club: "РБ Тотем", points: 0, price: 6, tourPoints: { 1: 0 } },
+    { name: "Джон Дейви Харрисон", position: "НАП", club: "РБ Тотем", points: 0, price: 6, tourPoints: { 1: 0 } },
+    { name: "Зорк Фордон", position: "НАП", club: "РБ Тотем", points: 0, price: 6, tourPoints: { 1: 0 } },
+    { name: "Дэвид Брейнер", position: "НАП", club: "РБ Тотем", points: 0, price: 6, tourPoints: { 1: 0 } },
+    { name: "Фрэнк Брошич", position: "НАП", club: "РБ Тотем", points: 0, price: 6, tourPoints: { 1: 0 } },
+    { name: "Гван Янссенс", position: "НАП", club: "РБ Тотем", points: 0, price: 6, tourPoints: { 1: 0 } },
+    { name: "Йорг Кесслер", position: "НАП", club: "РБ Тотем", points: 0, price: 6, tourPoints: { 1: 0 } },
+    { name: "Эмиль Вергамп", position: "НАП", club: "РБ Тотем", points: 0, price: 6, tourPoints: { 1: 0 } },
+   // Мелитополь
+   { name: "Марко Флеккен", position: "ВР", club: "Мелитополь", points: 0, price: 3, tourPoints: { 1: 0 } },
+   { name: "Олексий Свинорыло", position: "ВР", club: "Мелитополь", points: 0, price: 3, tourPoints: { 1: 0 } },
+   { name: "Джеймс Богдик", position: "ЗЩ", club: "Мелитополь", points: 0, price: 4, tourPoints: { 1: 0 } },
+   { name: "Йозеф Кучера", position: "ЗЩ", club: "Мелитополь", points: 0, price: 4, tourPoints: { 1: 0, 2: 0 } },
+   { name: "Михаил Кузин", position: "ЗЩ", club: "Мелитополь", points: 0, price: 4, tourPoints: { 1: 0 } },
+   { name: "Рикардо Сантана", position: "ЗЩ", club: "Мелитополь", points: 0, price: 4, tourPoints: { 1: 0 } },
+   { name: "Эктор Де Форт", position: "ЗЩ", club: "Мелитополь", points: 0, price: 4, tourPoints: { 1: 0 } },
+   { name: "Воут Бертранд", position: "ПЗ", club: "Мелитополь", points: 0, price: 5, tourPoints: { 1: 0 } },
+   { name: "Йозеф Кауп", position: "ПЗ", club: "Мелитополь", points: 0, price: 5, tourPoints: { 1: 0 } },
+   { name: "Павел Ступка", position: "ПЗ", club: "Мелитополь", points: 0, price: 5, tourPoints: { 1: 0 } },
+   { name: "Роман Шустер", position: "ПЗ", club: "Мелитополь", points: 0, price: 5, tourPoints: { 1: 0 } },
+   { name: "Фелипе Джуниор", position: "ПЗ", club: "Мелитополь", points: 0, price: 5, tourPoints: { 1: 0 } },
+   { name: "Фоксекс Виллон", position: "ПЗ", club: "Мелитополь", points: 0, price: 5, tourPoints: { 1: 0 } },
+   { name: "Мартин Энжер", position: "НАП", club: "Мелитополь", points: 0, price: 6, tourPoints: { 1: 0 } },
+   { name: "Павел Муратов", position: "НАП", club: "Мелитополь", points: 0, price: 6, tourPoints: { 1: 0 } },
+   { name: "Роман Кравцов", position: "НАП", club: "Мелитополь", points: 0, price: 6, tourPoints: { 1: 0 } },
+
+    
 
 
 
@@ -615,14 +686,15 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Отображение доступных замен
     // Отображение доступных замен
+    // Отображение доступных замен
     const transfersDiv = document.createElement("div");
     transfersDiv.classList.add("transfers");
     if (!isNewUser() && isTransferMode) {
-        transfersDiv.innerHTML = `<span>Доступные замены: <span id="transfers-count">${userData.availableTransfers}</span></span>`;
+            transfersDiv.innerHTML = `<span>Доступные замены: <span id="transfers-count">${userData.availableTransfers}</span></span>`;
     } else {
-     transfersDiv.innerHTML = `<span>Соберите и сохраните состав</span>`;
+        transfersDiv.innerHTML = `<span>Соберите и сохраните состав</span>`;
     }
-    document.querySelector(".footer-section").prepend(transfersDiv);
+    document.querySelector(".budget").prepend(transfersDiv);
 
     // Восстанавливаем состав
     if (userData.selectedPlayers.length > 0) {
@@ -885,7 +957,6 @@ document.addEventListener("DOMContentLoaded", function() {
     positionFilter.addEventListener("change", () => { currentPage = 1; renderPlayers(); });
     sortFilter.addEventListener("change", () => { currentPage = 1; renderPlayers(); });
 });
-// В конец файла script.js
 document.addEventListener("DOMContentLoaded", function() {
     // Оптимизация для мобильных устройств
     if (window.innerWidth <= 768) {
@@ -905,8 +976,25 @@ document.addEventListener("DOMContentLoaded", function() {
             filters.style.position = 'sticky';
             filters.style.top = '0';
             filters.style.background = 'rgba(0,0,0,0.8)';
-            filters.style.zIndex = '100';
+            filters.style.zIndex = '100'; // Убедимся, что фильтры ниже таблицы лидеров
             filters.style.padding = '10px 0';
+        }
+
+        // Улучшаем форму на fantasy.html
+        const userForm = document.querySelector('#user-form');
+        if (userForm) {
+            userForm.style.boxSizing = 'border-box';
+            userForm.querySelectorAll('input, select').forEach(input => {
+                input.style.width = '100%'; // Убедимся, что поля занимают всю ширину
+                input.style.boxSizing = 'border-box';
+            });
+
+            const nextButton = userForm.querySelector('.next-button');
+            if (nextButton) {
+                nextButton.style.minHeight = '44px'; // Минимальный размер для касаний
+                nextButton.style.width = '100%'; // Кнопка на всю ширину формы
+                nextButton.style.maxWidth = '200px'; // Ограничиваем ширину
+            }
         }
     }
 });
