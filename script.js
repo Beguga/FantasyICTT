@@ -15,6 +15,14 @@ const tours = [
     { id: 4, status: "active", deadline: "2025-05-07T23:59:00" },
     { id: 5, status: "upcoming", deadline: "2025-05-14T23:59:00" },
     { id: 6, status: "upcoming", deadline: "2025-05-21T23:59:00" },
+    { id: 7, status: "upcoming", deadline: "2025-05-21T23:59:00" },
+    { id: 8, status: "upcoming", deadline: "2025-05-21T23:59:00" },
+    { id: 9, status: "upcoming", deadline: "2025-05-21T23:59:00" },
+    { id: 10, status: "upcoming", deadline: "2025-05-21T23:59:00" },
+    { id: 11, status: "upcoming", deadline: "2025-05-21T23:59:00" },
+    { id: 12, status: "upcoming", deadline: "2025-05-21T23:59:00" },
+    { id: 13, status: "upcoming", deadline: "2025-05-21T23:59:00" },
+    { id: 14, status: "upcoming", deadline: "2025-05-21T23:59:00" },
 ];
 
 // Данные об игроках
