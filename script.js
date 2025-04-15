@@ -222,6 +222,47 @@ const playersData = [
   { name: "Ларс Олсен", position: "НАП", club: "Джумейра", points: 0, price: 6, tourPoints: { 1: 0 } },
   { name: "Алекс Шик", position: "НАП", club: "Джумейра", points: 0, price: 6, tourPoints: { 1: 0 } },
   { name: "Антуан Лефевр", position: "НАП", club: "Джумейра", points: 0, price: 6, tourPoints: { 1: 0 } },
+    // кобресаль
+    { name: "Фил Паркер", position: "ВР", club: "Кобресаль", points: 0, price: 3, tourPoints: { 1: 0 } },
+    { name: "Жереми Доку", position: "ЗЩ", club: "Кобресаль", points: 0, price: 4, tourPoints: { 1: 0 } },
+    { name: "Константин Ковалев", position: "ЗЩ", club: "Кобресаль", points: 0, price: 4, tourPoints: { 1: 0, 2: 0 } },
+    { name: "Артем Галимов", position: "ЗЩ", club: "Кобресаль", points: 0, price: 4, tourPoints: { 1: 0 } },
+    { name: "Анжело Де Эспосито", position: "ЗЩ", club: "Кобресаль", points: 0, price: 4, tourPoints: { 1: 0 } },
+    { name: "Доминик Лоурен", position: "ПЗ", club: "Кобресаль", points: 0, price: 5, tourPoints: { 1: 0 } },
+    { name: "Глеб Юнук", position: "ПЗ", club: "Кобресаль", points: 0, price: 5, tourPoints: { 1: 0 } },
+    { name: "Бахтыр Дабиулин", position: "ПЗ", club: "ДКобресаль", points: 0, price: 5, tourPoints: { 1: 0 } },
+    { name: "Константин Николаев", position: "ПЗ", club: "Кобресаль", points: 0, price: 5, tourPoints: { 1: 0 } },
+    { name: "Александр Суворов", position: "ПЗ", club: "Кобресаль", points: 0, price: 5, tourPoints: { 1: 0 } },
+    { name: "Максим Тарзанов", position: "ПЗ", club: "Кобресаль", points: 0, price: 5, tourPoints: { 1: 0 } },
+    { name: "Бобби Кларк", position: "ПЗ", club: "Кобресаль", points: 0, price: 5, tourPoints: { 1: 0 } },
+    { name: "Тео Кане", position: "ПЗ", club: "Кобресаль", points: 0, price: 5, tourPoints: { 1: 0 } },
+    { name: "Эндрю Кинг", position: "НАП", club: "Кобресаль", points: 0, price: 6, tourPoints: { 1: 0 } },
+    { name: "Серри Делитте", position: "НАП", club: "Кобресаль", points: 0, price: 6, tourPoints: { 1: 0 } },
+    { name: "Марк Сплати", position: "НАП", club: "Кобресаль", points: 0, price: 6, tourPoints: { 1: 0 } },
+    // Уралан
+    { name: "Джорджи Стафф", position: "ВР", club: "Уралан", points: 0, price: 2, tourPoints: { 1: 0 } },
+    { name: "Винсент Делюка", position: "ЗЩ", club: "Уралан", points: 0, price: 3, tourPoints: { 1: 0 } },
+    { name: "Джоэй Силва", position: "ПЗ", club: "Уралан", points: 0, price: 4, tourPoints: { 1: 0 } },
+    { name: "Диего Орландо", position: "ПЗ", club: "Уралан", points: 0, price: 4, tourPoints: { 1: 0 } },
+    { name: "Алекс Тумпер", position: "НАП", club: "Уралан", points: 0, price: 5, tourPoints: { 1: 0 } },
+    { name: "Кристиан Чанел", position: "НАП", club: "Уралан", points: 0, price: 5, tourPoints: { 1: 0 } },
+    // Флорида
+    { name: "Алехандро Берджи", position: "ВР", club: "Флорида", points: 0, price: 2, tourPoints: { 1: 0 } },
+    { name: "Флорентино Талко", position: "ВР", club: "Флорида", points: 0, price: 2, tourPoints: { 1: 0 } },
+    { name: "Алехандру Матаб", position: "ЗЩ", club: "Флорида", points: 0, price: 3, tourPoints: { 1: 0 } },
+    { name: "Кристен Свифткей", position: "ЗЩ", club: "Флорида", points: 0, price: 3, tourPoints: { 1: 0 } },
+    { name: "Мудак Пидор", position: "ЗЩ", club: "Флорида", points: 0, price: 3, tourPoints: { 1: 0 } },
+    { name: "Фит Флоу", position: "ЗЩ", club: "Флорида", points: 0, price: 3, tourPoints: { 1: 0 } },
+    { name: "Адам Рудони", position: "ПЗ", club: "Флорида", points: 0, price: 4, tourPoints: { 1: 0 } },
+    { name: "Лиам Майк", position: "ПЗ", club: "Флорида", points: 0, price: 4, tourPoints: { 1: 0 } },
+    { name: "Станишич Геронимо", position: "ПЗ", club: "Флорида", points: 0, price: 4, tourPoints: { 1: 0 } },
+    { name: "Франко Карбонч", position: "ПЗ", club: "Флорида", points: 0, price: 4, tourPoints: { 1: 0 } },
+    { name: "Алехандро Мефедрини", position: "НАП", club: "Флорида", points: 0, price: 5, tourPoints: { 1: 0 } },
+    { name: "Лигар Берджи", position: "НАП", club: "Флорида", points: 0, price: 5, tourPoints: { 1: 0 } },
+    { name: "Рео Гонсалез", position: "НАП", club: "Флорида", points: 0, price: 5, tourPoints: { 1: 0 } },
+    { name: "Хуан Мусси", position: "НАП", club: "Флорида", points: 0, price: 5, tourPoints: { 1: 0 } },
+
+
 
 
     
