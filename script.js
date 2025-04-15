@@ -794,14 +794,15 @@ document.addEventListener("DOMContentLoaded", function() {
     // Отображение доступных замен
     // Отображение доступных замен
     // Отображение доступных замен
-    const transfersDiv = document.createElement("div");
-    transfersDiv.classList.add("transfers");
-    if (!isNewUser() && isTransferMode) {
-            transfersDiv.innerHTML = `<span>Доступные замены: <span id="transfers-count">${userData.availableTransfers}</span></span>`;
-    } else {
-        transfersDiv.innerHTML = `<span>Соберите и сохраните состав</span>`;
-    }
-    document.querySelector(".budget").prepend(transfersDiv);
+    // Отображение доступных замен
+const transfersDiv = document.createElement("div");
+transfersDiv.classList.add("transfers");
+if (!isNewUser() && isTransferMode) {
+    transfersDiv.innerHTML = `<span>Доступные замены: <span id="transfers-count">${userData.availableTransfers}</span></span>`;
+} else {
+    transfersDiv.innerHTML = `<span>Соберите и сохраните состав</span>`;
+}
+document.querySelector(".footer-section").prepend(transfersDiv);
 
     // Восстанавливаем состав
     if (userData.selectedPlayers.length > 0) {
@@ -1082,7 +1083,7 @@ document.addEventListener("DOMContentLoaded", function() {
         if (filters) {
             filters.style.position = 'sticky';
             filters.style.top = '0';
-            filters.style.background = 'rgba(0,0,0,0.9)';
+            filters.style.background = 'rgba(0,0,0,0.8)';
             filters.style.zIndex = '100';
             filters.style.padding = '10px 0';
         }
