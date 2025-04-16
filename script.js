@@ -75,6 +75,7 @@ const playersData = [
     { name: "Стюарт Декстер-Драммонд", position: "ПЗ", club: "Ритховен", points: 0, price: 7, tourPoints: { 1: 0 } },
     { name: "Джейден Амасс", position: "ПЗ", club: "Ритховен", points: 0, price: 7, tourPoints: { 1: 0 } },
     { name: "Йелле Ван Дер Мер", position: "ПЗ", club: "Ритховен", points: 0, price: 7, tourPoints: { 1: 0 } },
+    { name: "Люк Камара", position: "ПЗ", club: "Ритховен", points: 0, price: 7, tourPoints: { 1: 0 } },
     { name: "Энту Криси", position: "ПЗ", club: "Ритховен", points: 0, price: 7, tourPoints: { 1: 0 } },
     { name: "Яковлев Александр", position: "ПЗ", club: "Ритховен", points: 0, price: 7, tourPoints: { 1: 0 } },
     { name: "Эллиас Веннестра", position: "ПЗ", club: "Ритховен", points: 0, price: 7, tourPoints: { 1: 0 } },
