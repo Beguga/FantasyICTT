@@ -313,6 +313,7 @@ const playersData = [
     { name: "Сей Норманич", position: "ЗЩ", club: "Фьорд", points: 0, price: 3, tourPoints: { 1: 0 } },
     { name: "Ашот Арутюрян", position: "ПЗ", club: "Фьорд", points: 0, price: 4, tourPoints: { 1: 0 } },
     { name: "Гленн Бейл", position: "ПЗ", club: "Фьорд", points: 0, price: 4, tourPoints: { 1: 0 } },
+    { name: "Аран Манилов", position: "ПЗ", club: "Фьорд", points: 0, price: 4, tourPoints: { 1: 0 } },
     { name: "Маркс Карл", position: "ПЗ", club: "МФьорд", points: 0, price: 4, tourPoints: { 1: 0 } },
     { name: "Милош Альванте", position: "НАП", club: "Фьорд", points: 0, price: 5, tourPoints: { 1: 0 } },
     { name: "Дебир Этобо", position: "НАП", club: "Фьорд", points: 0, price: 5, tourPoints: { 1: 0 } },
