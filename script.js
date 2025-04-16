@@ -83,6 +83,7 @@ const playersData = [
     { name: "Рио Нгема", position: "НАП", club: "Ритховен", points: 0, price: 8, tourPoints: { 1: 0 } },
     { name: "Джек Крионель", position: "НАП", club: "Ритховен", points: 0, price: 8, tourPoints: { 1: 0 } },
     { name: "Юлиан Пьере", position: "НАП", club: "Ритховен", points: 0, price: 8, tourPoints: { 1: 0 } },
+    { name: "Гиорги Микеладзе", position: "НАП", club: "Ритховен", points: 0, price: 8, tourPoints: { 1: 0 } },
     { name: "Йерун Ван Дер Мерве", position: "НАП", club: "Ритховен", points: 0, price: 8, tourPoints: { 1: 0 } },
     // Братислава
     { name: "Роман Ранни", position: "ВР", club: "РБ Братислава", points: 0, price: 5, tourPoints: { 1: 0 } },
