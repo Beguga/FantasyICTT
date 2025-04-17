@@ -17,8 +17,8 @@ function updatePlayerPoints() {
 // Данные о турах
 const tours = [
     { id: 1, status: "completed", deadline: "2025-03-16T23:59:00" },
-    { id: 2, status: "completed", deadline: "2025-03-24T23:59:00" },
-    { id: 3, status: "active", deadline: "2025-04-30T23:59:00" },
+    { id: 2, status: "active", deadline: "2025-03-24T23:59:00" },
+    { id: 3, status: "upcoming", deadline: "2025-04-30T23:59:00" },
     { id: 4, status: "upcoming", deadline: "2025-05-07T23:59:00" },
     { id: 5, status: "upcoming", deadline: "2025-05-14T23:59:00" },
     { id: 6, status: "upcoming", deadline: "2025-05-21T23:59:00" },
@@ -84,8 +84,8 @@ const playersData = [
     { name: "Лукаш Джошевич", position: "ВР", club: "Ритховен", points: 5, price: 5, tourPoints: { 1: 5, 2: 5, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0, 11: 0, 12: 0, 13: 0, 14: 0, 15: 0, 16: 0, 17: 0 } },
     { name: "Томми Нимери", position: "ЗЩ", club: "Ритховен", points: 5, price: 6, tourPoints: { 1: 5, 2: 5, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0, 11: 0, 12: 0, 13: 0, 14: 0, 15: 0, 16: 0, 17: 0 } },
     { name: "Этхан Морено", position: "ЗЩ", club: "Ритховен", points: 0, price: 6, tourPoints: { 1: 0, 2: 5, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0, 11: 0, 12: 0, 13: 0, 14: 0, 15: 0, 16: 0, 17: 0 } },
-    { name: "Джейкоб Кумба", position: "ЗЩ", club: "Ритховен", points: 5, price: 6, tourPoints: { 1: 5, 2: 11, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0, 11: 0, 12: 0, 13: 0, 14: 0, 15: 0, 16: 0, 17: 0 } },
-    { name: "Максим Милошевич", position: "ЗЩ", club: "Ритховен", points: 5, price: 6, tourPoints: { 1: 5, 2: 11, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0, 11: 0, 12: 0, 13: 0, 14: 0, 15: 0, 16: 0, 17: 0 } },
+    { name: "Джейкоб Кумба", position: "ЗЩ", club: "Ритховен", points: 5, price: 6, tourPoints: { 1: 5, 2: 10, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0, 11: 0, 12: 0, 13: 0, 14: 0, 15: 0, 16: 0, 17: 0 } },
+    { name: "Максим Милошевич", position: "ЗЩ", club: "Ритховен", points: 5, price: 6, tourPoints: { 1: 5, 2: 10, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0, 11: 0, 12: 0, 13: 0, 14: 0, 15: 0, 16: 0, 17: 0 } },
     { name: "Джереми Джеймс", position: "ЗЩ", club: "Ритховен", points: 5, price: 6, tourPoints: { 1: 5, 2: 5, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0, 11: 0, 12: 0, 13: 0, 14: 0, 15: 0, 16: 0, 17: 0 } },
     { name: "Стюарт Декстер-Драммонд", position: "ПЗ", club: "Ритховен", points: 2, price: 7, tourPoints: { 1: 2, 2: 2, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0, 11: 0, 12: 0, 13: 0, 14: 0, 15: 0, 16: 0, 17: 0 } },
     { name: "Франческо Грандольфо", position: "ПЗ", club: "Ритховен", points: 2, price: 7, tourPoints: { 1: 2, 2: 2, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0, 11: 0, 12: 0, 13: 0, 14: 0, 15: 0, 16: 0, 17: 0 } },
@@ -223,7 +223,7 @@ const playersData = [
   { name: "Швед", position: "ВР", club: "Гладиатор", points: 1, price: 3, tourPoints: { 1: 1, 2: 5, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0, 11: 0, 12: 0, 13: 0, 14: 0, 15: 0, 16: 0, 17: 0 } },
   { name: "Алекс Селихов", position: "ВР", club: "Гладиатор", points: 0, price: 3, tourPoints: { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0, 11: 0, 12: 0, 13: 0, 14: 0, 15: 0, 16: 0, 17: 0 } },
   { name: "Накатика Явъебука", position: "ЗЩ", club: "Гладиатор", points: 0, price: 4, tourPoints: { 1: 0, 2: 5, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0, 11: 0, 12: 0, 13: 0, 14: 0, 15: 0, 16: 0, 17: 0 } },
-  { name: "Евгений Джикия", position: "ЗЩ", club: "Гладиатор", points: 0, price: 4, tourPoints: { 1: 0, 2: 11, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0, 11: 0, 12: 0, 13: 0, 14: 0, 15: 0, 16: 0, 17: 0 } },
+  { name: "Евгений Джикия", position: "ЗЩ", club: "Гладиатор", points: 0, price: 4, tourPoints: { 1: 0, 2: 10, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0, 11: 0, 12: 0, 13: 0, 14: 0, 15: 0, 16: 0, 17: 0 } },
   { name: "Антон Чернов", position: "ЗЩ", club: "Гладиатор", points: 0, price: 4, tourPoints: { 1: 0, 2: 5, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0, 11: 0, 12: 0, 13: 0, 14: 0, 15: 0, 16: 0, 17: 0 } },
     { name: "Марти Перейра", position: "ПЗ", club: "Гладиатор", points: 1, price: 5, tourPoints: { 1: 1, 2: 5, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0, 11: 0, 12: 0, 13: 0, 14: 0, 15: 0, 16: 0, 17: 0 } },
     { name: "Дмитрий Игнатов", position: "ПЗ", club: "Гладиатор", points: 1, price: 5, tourPoints: { 1: 1, 2: 5, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0, 11: 0, 12: 0, 13: 0, 14: 0, 15: 0, 16: 0, 17: 0 } },
@@ -915,65 +915,97 @@ document.querySelector(".footer-section").prepend(transfersDiv);
     }
 
     // Добавление игрока
-    function addPlayer(player) {
-        if (!canEditTeam(selectedTourId)) {
-            alert("Вы можете редактировать состав только в текущем туре, и только до дедлайна!");
-            return;
-        }
-
-        if (isTransferMode && userData.availableTransfers <= 0) {
-            alert("У вас закончились замены на этот тур!");
-            return;
-        }
-
-        if (userData.selectedPlayers.some(item => item.player.name === player.name)) {
-            alert("Этот игрок уже добавлен в состав!");
-            return;
-        }
-
-        const clubCount = userData.selectedPlayers.filter(item => item.player.club === player.club).length;
-        if (clubCount >= 3) {
-            alert("Нельзя добавить больше 3 игроков из одного клуба!");
-            return;
-        }
-
-        if (budget - player.price < 0) {
-            alert("Недостаточно бюджета!");
-            return;
-        }
-
-        const slots = document.querySelectorAll(`.player-slot[data-position="${player.position}"]`);
-        let added = false;
-        for (let slot of slots) {
-            if (!slot.classList.contains("filled") && !added) {
-                const slotIndex = Array.from(document.querySelectorAll(".player-slot")).indexOf(slot);
-                slot.classList.add("filled");
-                slot.innerHTML = `${player.name} <button class="remove-player" data-slot-index="${slotIndex}">x</button>`;
-                slot.dataset.player = JSON.stringify(player);
-                slot.dataset.slotIndex = slotIndex;
-                userData.selectedPlayers.push({ player, slotIndex });
-                budget -= player.price;
-                userData.budget = budget;
-                budgetDisplay.textContent = budget;
-
-                if (isTransferMode) {
-                    userData.availableTransfers--;
-                    pendingRemovals--;
-                    if (pendingRemovals < 0) pendingRemovals = 0; // Убедимся, что pendingRemovals не уйдёт в минус
-                    document.getElementById("transfers-count").textContent = userData.availableTransfers;
-                }
-
-                added = true;
-            }
-        }
-
-        if (!added) {
-            alert("Нет свободных слотов для этой позиции!");
-        }
-
-        saveUserData();
-        renderPlayers();
+    // Добавление игрока
+function addPlayer(player) {
+    if (!canEditTeam(selectedTourId)) {
+        alert("Вы можете редактировать состав только в текущем туре, и только до дедлайна!");
+        return;
     }
+
+    if (isTransferMode && userData.availableTransfers <= 0) {
+        alert("У вас закончились замены на этот тур!");
+        return;
+    }
+
+    if (userData.selectedPlayers.some(item => item.player.name === player.name)) {
+        alert("Этот игрок уже добавлен в состав!");
+        return;
+    }
+
+    const clubCount = userData.selectedPlayers.filter(item => item.player.club === player.club).length;
+    if (clubCount >= 3) {
+        alert("Нельзя добавить больше 3 игроков из одного клуба!");
+        return;
+    }
+
+    if (budget - player.price < 0) {
+        alert("Недостаточно бюджета!");
+        return;
+    }
+
+    const slots = document.querySelectorAll(`.player-slot[data-position="${player.position}"]`);
+    let added = false;
+    for (let slot of slots) {
+        if (!slot.classList.contains("filled") && !added) {
+            const slotIndex = Array.from(document.querySelectorAll(".player-slot")).indexOf(slot);
+            slot.classList.add("filled");
+            const tourPoints = player.tourPoints[selectedTourId] || 0;
+            slot.innerHTML = `
+                <span class="player-name">${player.name}</span>
+                <button class="remove-player" data-slot-index="${slotIndex}">x</button>
+                <span class="tour-points">${tourPoints} очк.</span>
+            `;
+            slot.dataset.player = JSON.stringify(player);
+            slot.dataset.slotIndex = slotIndex;
+            userData.selectedPlayers.push({ player, slotIndex });
+            budget -= player.price;
+            userData.budget = budget;
+            budgetDisplay.textContent = budget;
+
+            if (isTransferMode) {
+                userData.availableTransfers--;
+                pendingRemovals--;
+                if (pendingRemovals < 0) pendingRemovals = 0;
+                document.getElementById("transfers-count").textContent = userData.availableTransfers;
+            }
+
+            added = true;
+        }
+    }
+
+    if (!added) {
+        alert("Нет свободных слотов для этой позиции!");
+    }
+
+    saveUserData();
+    renderPlayers();
+}
+
+// Отображение состава для выбранного тура
+function displayTeamForTour(tourId) {
+    const slots = document.querySelectorAll(".player-slot");
+    slots.forEach(slot => {
+        slot.classList.remove("filled");
+        slot.innerHTML = "";
+        slot.dataset.player = "";
+        slot.dataset.slotIndex = "";
+    });
+
+    userData.selectedPlayers.forEach(({ player, slotIndex }) => {
+        const slot = document.querySelectorAll(".player-slot")[slotIndex];
+        if (slot && slot.dataset.position === player.position) {
+            slot.classList.add("filled");
+            const tourPoints = player.tourPoints[tourId] || 0;
+            slot.innerHTML = `
+                <span class="player-name">${player.name}</span>
+                <button class="remove-player" data-slot-index="${slotIndex}">x</button>
+                <span class="tour-points">${tourPoints} очк.</span>
+            `;
+            slot.dataset.player = JSON.stringify(player);
+            slot.dataset.slotIndex = slotIndex;
+        }
+    });
+}
 
     // Удаление игрока
     function removePlayer(slot, slotIndex) {
